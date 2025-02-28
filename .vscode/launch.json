@@ -1,0 +1,23 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "request": "launch",
+      "type": "node-terminal",
+      "name": "vitest:watch:current",
+      "command": "npm run vitest:watch -- ${relativeFile}",
+      "smartStep": true,
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "request": "launch",
+      "type": "node-terminal",
+      "name": "vitest:watch:all",
+      "command": "npm run vitest:watch",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
