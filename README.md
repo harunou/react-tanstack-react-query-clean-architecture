@@ -77,52 +77,41 @@ Dependency graph of the code units.
 │   │   ├── httpClient.ts
 │   │   └── index.ts
 │   ├── index.ts
-│   ├── OrdersApi
-│   │   ├── index.ts
-│   │   ├── OrdersApi.factory.ts
-│   │   ├── OrdersApi.ts
-│   │   └── OrdersApi.types.ts
-│   └── ServiceApi
+│   └── OrdersApi
 │       ├── index.ts
-│       ├── ServiceApi.ts
-│       └── ServiceApi.types.ts
+│       ├── OrdersApi.factory.ts
+│       ├── OrdersApi.ts
+│       └── OrdersApi.types.ts
 ├── cli
 │   ├── cli.tsx
 │   ├── commands
 │   │   ├── DeleteOrder.tsx
-│   │   └── index.ts
+│   │   ├── index.ts
+│   │   └── SwitchOrdersResource.tsx
 │   └── index.ts
 ├── gateways
 │   ├── index.ts
-│   ├── OrdersGateway
-│   │   ├── hooks
-│   │   │   ├── index.ts
-│   │   │   ├── useDeleteOrderItemKey.ts
-│   │   │   ├── useDeleteOrderItemOptions.ts
-│   │   │   ├── useDeleteOrderKey.ts
-│   │   │   ├── useDeleteOrderOptions.ts
-│   │   │   ├── useGetOrdersKey.ts
-│   │   │   ├── useGetOrdersOptions.ts
-│   │   │   └── useOrdersGateway.ts
-│   │   ├── index.ts
-│   │   ├── LocalOrdersGateway
-│   │   │   ├── index.ts
-│   │   │   ├── LocalOrdersGateway.spec.ts
-│   │   │   └── LocalOrdersGateway.ts
-│   │   ├── makeOrderEntities.ts
-│   │   └── RemoteOrdersGateway
-│   │       ├── index.ts
-│   │       ├── mappers.ts
-│   │       ├── RemoteOrdersGateway.spec.ts
-│   │       └── RemoteOrdersGateway.ts
-│   └── ServiceGateway
-│       ├── index.ts
-│       ├── RemoteServiceGateway
+│   └── OrdersGateway
+│       ├── hooks
 │       │   ├── index.ts
-│       │   ├── mappers.ts
-│       │   └── RemoteServiceGateway.ts
-│       ├── StubServiceGateway.ts
-│       └── useServiceGateway.ts
+│       │   ├── useDeleteOrderItemKey.ts
+│       │   ├── useDeleteOrderItemOptions.ts
+│       │   ├── useDeleteOrderKey.ts
+│       │   ├── useDeleteOrderOptions.ts
+│       │   ├── useGetOrdersKey.ts
+│       │   ├── useGetOrdersOptions.ts
+│       │   └── useOrdersGateway.ts
+│       ├── index.ts
+│       ├── LocalOrdersGateway
+│       │   ├── index.ts
+│       │   ├── LocalOrdersGateway.spec.ts
+│       │   └── LocalOrdersGateway.ts
+│       ├── makeOrderEntities.ts
+│       └── RemoteOrdersGateway
+│           ├── index.ts
+│           ├── mappers.ts
+│           ├── RemoteOrdersGateway.spec.ts
+│           └── RemoteOrdersGateway.ts
 ├── hooks
 │   ├── selectors
 │   │   ├── index.ts
@@ -169,8 +158,7 @@ Dependency graph of the code units.
 │   │   └── OrdersPresentationEntity.ts
 │   ├── gateways
 │   │   ├── index.ts
-│   │   ├── OrdersGateway.ts
-│   │   └── ServiceGateway.ts
+│   │   └── OrdersGateway.ts
 │   ├── index.ts
 │   └── OrdersResource.ts
 ├── utils
