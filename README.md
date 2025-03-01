@@ -56,10 +56,13 @@ overengineering.
   into use case invocations.
 - **Presenter**: Unit that transforms the application state into output data
   suitable for the view, often using selectors.
+- **View**: Unit that is responsible for displaying information to the user
+  based on the data prepared by the Presenter and for capturing user input and
+  transferring it to the Controller.
 
 ## Frontend Clean Architecture Diagram
 
-![diagram](docs/ca-diagram.png)
+![diagram](docs/fe-ca-diagram.png)
 
 ## Dependency Graphs
 
