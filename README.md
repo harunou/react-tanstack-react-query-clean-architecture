@@ -57,6 +57,10 @@ overengineering.
 - **Presenter**: Unit that transforms the application state into output data
   suitable for the view, often using selectors.
 
+## Frontend Clean Architecture Diagram
+
+![diagram](docs/ca-diagram.png)
+
 ## Dependency Graphs
 
 Dependency graph of the code units.
