@@ -1,6 +1,6 @@
 import { memo, useEffect, type FC } from "react";
-import type { OrderEntityId } from "../../types";
-import { useDeleteOrderUseCase } from "../../hooks/useCases";
+import type { OrderEntityId } from "../../../types";
+import { useController } from "./hooks";
 
 declare global {
   interface Window {
@@ -9,12 +9,12 @@ declare global {
 }
 
 export const DeleteOrder: FC = memo(() => {
-  const { execute: executeDeleteOrder } = useDeleteOrderUseCase();
+  const controller = useController();
 
   useEffect(() => {
     window.deleteOrder = async (id: OrderEntityId) => {
       try {
-        await executeDeleteOrder({ orderId: id });
+        await controller.deleteOrderRequested(id);
         console.log(`Order with id ${id} has been deleted`);
       } catch (e) {
         console.log(e);
@@ -24,7 +24,7 @@ export const DeleteOrder: FC = memo(() => {
     return () => {
       delete window.deleteOrder;
     };
-  }, [executeDeleteOrder]);
+  }, [controller]);
 
   return null;
 });
