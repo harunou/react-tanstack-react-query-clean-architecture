@@ -10,10 +10,14 @@ doesn't have to result in unnecessary 🤯 complexity or overengineering.
 
 ## Benefits
 
-1. Low cognitive load when working with a codebase.
-2. Unified control and data flow throughout the application.
-3. Independent and reusable code units with separated concerns.
-4. Testable code with clear boundaries for unit and integration tests.
+1. Limited context and low cognitive load, when working with a codebase.
+2. Independent, reusable and portable code units with separated concerns.
+3. Unified control and data flow throughout the application.
+4. Testable code with clear boundaries for unit and integration tests, where
+   tests are inline application specifications.
+
+Apart from human developers, these benefits apply well to AI assistants, helping
+reduce code entropy through multiple repeated iterations.
 
 ## Definitions
 
