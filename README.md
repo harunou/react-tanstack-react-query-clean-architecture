@@ -3,11 +3,10 @@
 This project demonstrates a [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 implementation in a React application using TanStack React Query and Zustand.
 
-By applying Clean Architecture principles, this project maintains both
-structural integrity and remains straightforward and 💡 easy to understand. The
-project demonstrates that implementing Clean Architecture in frontend
-applications doesn't have to result in unnecessary 🤯 complexity or
-overengineering.
+By applying Clean Architecture principles, this project maintains structural
+integrity, remains straightforward and 💡 easy to understand. The project
+demonstrates that implementing Clean Architecture in frontend applications
+doesn't have to result in unnecessary 🤯 complexity or overengineering.
 
 ## Benefits
 
