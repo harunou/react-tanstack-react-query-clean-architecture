@@ -1,6 +1,7 @@
 # Clean Architecture Implementation for React Application with Tanstack React Query and Zustand
 
-This project demonstrates a [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+This project demonstrates a
+[Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 implementation in a React application using TanStack React Query and Zustand.
 
 By applying Clean Architecture principles, this project maintains structural
@@ -19,37 +20,17 @@ doesn't have to result in unnecessary 🤯 complexity or overengineering.
 Apart from human developers, these benefits apply well to AI assistants, helping
 reduce code entropy through multiple repeated iterations.
 
-## Definitions
+## Definition of units
 
-- **Enterprise Business Rules and Data**: The most general and high-level rules
-  and data that would exist even if the application didn't. These are
-  enterprise-wide rules that rarely change and are independent of any specific
-  application.
-- **Enterprise Business Entity**: Unit that encapsulates enterprise business
-  rules and data. These entities represent the core business concepts and are
-  technology-agnostic, containing no dependencies on frameworks or external
-  systems.
-- **Application Business Rules and Data**: Rules and data specific to the
-  application's functionality and presentation. This includes how business
-  concepts are presented to users, interaction flows, UI state management, and
-  application-specific behaviors. These are more likely to change compared to
-  enterprise rules.
-- **Application Business Entity**: Unit that encapsulates application-specific
-  business rules and data. These represent concepts that only exist within the
-  context of the application. Data and rules specific to how information is
-  presented to users, including display preferences, UI behavior, and interaction
-  patterns.
-- **Store**: An aggregate unit that maintains a collection of business and/or UI
-  entities and their states.
-- **State**: The value of a store at a given point in time, typically
-  represented as an object structure.
-- **Valid State**: One of a finite number of store values that is conceptually
-  considered valid according to business and application rules.
-- **Gateway**: Unit that isolates external resources by providing interfaces for
-  data access, mapping data from external resources into entities, and potentially
-  caching data.
+- **Enterprise Business Entity (EB Entity)**: Unit that encapsulates enterprise
+  business rules and data.
+- **Application Business Entity (AB Entity)**: Unit that encapsulates
+  application-specific business rules and data.
+- **Store**: An aggregate unit that maintains a collection of enterprise
+  business entities and/or application business entities and their states.
 - **Selector**: Unit that derives values or data structures from the state
-  without modifying it, implementing read-only queries against the state.
+  without modifying it, implementing read-only queries against the state,
+  implements application business rules.
 - **Transaction**: Unit with logic that transitions a store between two valid
   states, ensuring business rules are maintained.
 - **Use Case**: Unit that orchestrates the flow of data in the application by
@@ -60,8 +41,29 @@ reduce code entropy through multiple repeated iterations.
 - **Presenter**: Unit that transforms the application state into output data
   suitable for the view, often using selectors.
 - **View**: Unit that is responsible for displaying information to the user
-  based on the data prepared by the Presenter and for capturing user input and
-  transferring it to the Controller.
+  based on the data prepared by the presenter and for capturing user input and
+  transferring it to the controller.
+- **Gateway**: Unit that isolates external resources by providing interfaces for
+  data access, mapping data from external resources into entities, and potentially
+  caching data.
+- **External Resource**: External systems or services that the application
+  interacts with, such as APIs, databases, storages, or other applications.
+
+## Definition of concepts utilized by the units
+
+- **Enterprise Business Rules and Data**: The most general and high-level rules
+  and data that would exist even if the application didn't. These are
+  enterprise-wide rules that rarely change and are independent of any specific
+  application.
+- **Application Business Rules and Data**: Rules and data specific to the
+  application's functionality and presentation. This includes how business
+  concepts are presented to users, interaction flows, UI state management, and
+  application-specific behaviors. These are more likely to change compared to
+  enterprise rules.
+- **State**: The value of a store at a given point in time, typically
+  represented as an object structure.
+- **Valid State**: One of a finite number of store values that is conceptually
+  considered valid according to business and application rules.
 
 ## Frontend Clean Architecture Diagram
 
