@@ -65,7 +65,12 @@ reduce code entropy through multiple repeated iterations.
 - **Valid State**: One of a finite number of store values that is conceptually
   considered valid according to business and application rules.
 
-## Frontend Clean Architecture Diagram
+## Clean Architecture Implementation
+
+The diagram below represents Clean Architecture implementation for a typical
+frontend application with a store and API integration. The implementation can be
+used with any modern reactive frontend framework, like React, Vue, Svelte, or
+Angular.
 
 ![diagram](docs/fe-ca-diagram.png)
 
