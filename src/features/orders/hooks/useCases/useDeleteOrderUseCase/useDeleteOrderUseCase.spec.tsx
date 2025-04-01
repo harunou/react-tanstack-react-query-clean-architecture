@@ -82,11 +82,11 @@ describe(`${useDeleteOrderUseCase.name}`, () => {
     context.gateway.getOrders.mockResolvedValueOnce(orders0).mockResolvedValueOnce(orders1);
     context.gateway.deleteOrder.mockResolvedValueOnce();
 
-    const { getByTestId } = render(<context.Sut />);
+    render(<context.Sut />);
 
     await vi.runAllTimersAsync();
 
-    const deleteButton = getByTestId(deleteOrderItemButtonTestId);
+    const deleteButton = screen.getByTestId(deleteOrderItemButtonTestId);
     context.user.click(deleteButton);
 
     await vi.runAllTimersAsync();
