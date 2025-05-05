@@ -20,22 +20,47 @@ doesn't have to result in unnecessary 🤯 complexity or overengineering.
 Apart from human developers, these benefits apply well to AI assistants, helping
 reduce code entropy through multiple repeated iterations.
 
+## Clean Architecture Implementation
+
+The diagram below represents a basic implementation of Clean Architecture for a
+typical frontend application with a store and API integration. The
+implementation can be used with any modern reactive frontend framework, like
+React, Vue, Svelte, or Angular.
+
+![basic-clean-architecture-implementation](docs/ca-fe-reactive-framework-basic.svg)
+
+The next diagram represents an extended implementation of Clean Architecture for
+a typical frontend application. The diagram shows additional units into which an
+application can be factored.
+
+![advanced-clean-architecture-implementation](docs/ca-fe-reactive-framework-extended.svg)
+
+> NOTE: the double lines on both diagrams are representing the boundaries
+> between the units. Typically the data that crosses the boundaries is simple
+> data structures, for example Data Transfer Objects (DTOs) or plain objects.
+
 ## Definition of units
 
 - **Enterprise Business Entity (EB Entity)**: Unit that encapsulates enterprise
   business rules and data.
 - **Application Business Entity (AB Entity)**: Unit that encapsulates
   application-specific business rules and data.
-- **Store**: An aggregate unit that maintains a collection of enterprise
+- **Entities Store**: An aggregate unit that maintains a collection of enterprise
   business entities and/or application business entities and their states.
+- **Use Case Interactor**: Unit that orchestrates the flow of data in the
+  application by coordinating entities, gateways, and transactions to fulfill
+  specific user goals, implements application business rules.
+- **Transaction**: Unit with logic that transitions a store between two valid
+  states, ensuring business rules are maintained.
 - **Selector**: Unit that derives values or data structures from the state
   without modifying it, implementing read-only queries against the state,
   implements application business rules.
-- **Transaction**: Unit with logic that transitions a store between two valid
-  states, ensuring business rules are maintained.
-- **Use Case**: Unit that orchestrates the flow of data in the application by
-  coordinating entities, gateways, and transactions to fulfill specific user
-  goals, implements application business rules.
+- **Gateway**: Unit that isolates external resources by providing interfaces for
+  data access, mapping data from external resources into entities, and potentially
+  caching data.
+- **Effect**: Unit that is responsible for encapsulating logic that interacts with
+  external resources through gateways, managing side effects, and handling
+  asynchronous operations.
 - **Controller**: Unit that handles input data from the view and converts it
   into use case invocations.
 - **Presenter**: Unit that transforms the application state into output data
@@ -43,9 +68,6 @@ reduce code entropy through multiple repeated iterations.
 - **View**: Unit that is responsible for displaying information to the user
   based on the data prepared by the presenter and for capturing user input and
   transferring it to the controller.
-- **Gateway**: Unit that isolates external resources by providing interfaces for
-  data access, mapping data from external resources into entities, and potentially
-  caching data.
 - **External Resource**: External systems or services that the application
   interacts with, such as APIs, databases, storages, or other applications.
 
@@ -64,15 +86,6 @@ reduce code entropy through multiple repeated iterations.
   represented as an object structure.
 - **Valid State**: One of a finite number of store values that is conceptually
   considered valid according to business and application rules.
-
-## Clean Architecture Implementation
-
-The diagram below represents Clean Architecture implementation for a typical
-frontend application with a store and API integration. The implementation can be
-used with any modern reactive frontend framework, like React, Vue, Svelte, or
-Angular.
-
-![diagram](docs/fe-ca-diagram.png)
 
 ## Dependency Graphs
 
