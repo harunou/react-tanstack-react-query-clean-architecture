@@ -1,15 +1,17 @@
 import { memo, useEffect, type FC } from "react";
 import { useController } from "./hooks/useController";
+import { useLogRenderer } from "../../hooks/useLogRenderer";
 
 export const DeleteOrder: FC = memo(() => {
-  const deleteOrderController = useController();
+  const renderer = useLogRenderer();
+  const controller = useController();
 
   useEffect(() => {
-    window.deleteOrder = deleteOrderController;
+    window.deleteOrder = async (id: unknown) => renderer(await controller(id));
     return () => {
       delete window.deleteOrder;
     };
-  }, [deleteOrderController]);
+  }, [controller, renderer]);
 
   return null;
 });

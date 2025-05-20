@@ -1,9 +1,8 @@
-import type { OrderEntityId } from "../../../types";
-
-export type DeleteOrderController = (id: OrderEntityId) => Promise<void>;
+export type ViewModel = string | Error;
+export type DeleteOrderController = (id: unknown) => Promise<ViewModel>;
 
 declare global {
   interface Window {
-    deleteOrder?: DeleteOrderController;
+    deleteOrder?: (id: unknown) => Promise<void>;
   }
 }
