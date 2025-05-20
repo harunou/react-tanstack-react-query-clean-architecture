@@ -12,7 +12,13 @@ if (!container) {
   );
 }
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      experimental_prefetchInRender: true,
+    },
+  },
+});
 
 const root = createRoot(container);
 root.render(
