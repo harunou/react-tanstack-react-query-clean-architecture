@@ -1,5 +1,6 @@
 import { type FC, memo, useEffect } from "react";
 import { useOrdersResourceSelector } from "../../hooks/selectors";
+import { useConsoleRenderer } from "../hooks/useConsoleRenderer";
 
 declare global {
   interface Window {
@@ -7,16 +8,24 @@ declare global {
   }
 }
 
-export const PrintOrdersResource: FC = memo(() => {
+type PrintOrdersResourceController = () => Promise<string | Error>;
+
+const useController = (): PrintOrdersResourceController => {
   const resource = useOrdersResourceSelector();
+  return async () => {
+    return `Orders resource is "${resource}"`;
+  };
+};
+
+export const PrintOrdersResource: FC = memo(() => {
+  const renderer = useConsoleRenderer();
+  const controller = useController();
   useEffect(() => {
-    window.printOrdersResource = () => {
-      console.log(`Orders resource is "${resource}"`);
-    };
+    window.printOrdersResource = async () => renderer(await controller());
 
     return () => {
       delete window.printOrdersResource;
     };
-  }, [resource]);
+  }, [controller, renderer]);
   return null;
 });

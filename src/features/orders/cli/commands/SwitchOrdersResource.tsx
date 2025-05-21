@@ -1,30 +1,41 @@
-import { memo, useEffect, type FC } from "react";
-import type { OrdersResource } from "../../types";
+import { memo, useCallback, useEffect, type FC } from "react";
 import { useOrdersPresentationStore } from "../../stores";
 import { isOrdersResource } from "../../utils";
+import { useConsoleRenderer } from "../hooks/useConsoleRenderer";
 
 declare global {
   interface Window {
-    switchOrdersResource?: (resource: OrdersResource) => void;
+    switchOrdersResource?: (resource: unknown) => void;
   }
 }
 
-export const SwitchOrdersResource: FC = memo(() => {
-  const setOrdersResource = useOrdersPresentationStore((state) => state.setOrdersResource);
+type SwitchOrdersResourceController = (resource: unknown) => Promise<string | Error>;
 
-  useEffect(() => {
-    window.switchOrdersResource = (resource: OrdersResource) => {
+const useController = (): SwitchOrdersResourceController => {
+  const setOrdersResource = useOrdersPresentationStore((state) => state.setOrdersResource);
+  return useCallback(
+    async (resource: unknown) => {
       if (!isOrdersResource(resource)) {
-        console.log("Invalid orders resource");
+        return new Error("Invalid orders resource");
       }
       setOrdersResource(resource);
-      console.log(`Orders resource has been switched to ${resource}`);
-    };
+      return `Orders resource switched to "${resource}"`;
+    },
+    [setOrdersResource],
+  );
+};
+
+export const SwitchOrdersResource: FC = memo(() => {
+  const renderer = useConsoleRenderer();
+  const controller = useController();
+  void controller;
+  useEffect(() => {
+    window.switchOrdersResource = async (resource: unknown) => renderer(await controller(resource));
 
     return () => {
       delete window.switchOrdersResource;
     };
-  }, [setOrdersResource]);
+  }, [controller, renderer]);
 
   return null;
 });

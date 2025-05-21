@@ -20,8 +20,8 @@ export const usePresenter = () => {
   return useCallback(
     async (id: OrderEntityId): Promise<ViewModel> => {
       const data = await selectOrderIds();
-      const ids = data.map((id: OrderEntityId) => `${id}`);
-      return `Order with id '${id}' has been deleted.\nAvailable order ids: '${ids.join("', '")}'`;
+      const ids = data.map((id: OrderEntityId) => `"${id}"`);
+      return `Order with id "${id}" has been deleted.\nAvailable order ids: ${ids.join(", ")}`;
     },
     [selectOrderIds],
   );
