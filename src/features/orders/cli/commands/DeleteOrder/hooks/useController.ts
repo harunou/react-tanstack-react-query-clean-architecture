@@ -10,7 +10,7 @@ export const useController = (): DeleteOrderController => {
   return useCallback(
     async (id: unknown) => {
       try {
-        if (!assertIdIsOrderEntityId(id)) {
+        if (!isOrderEntityId(id)) {
           throw new Error("Invalid ID");
         }
         await executeDeleteOrderUseCase({ orderId: id });
@@ -26,6 +26,6 @@ export const useController = (): DeleteOrderController => {
   );
 };
 
-const assertIdIsOrderEntityId = (id: unknown): id is OrderEntityId => {
+const isOrderEntityId = (id: unknown): id is OrderEntityId => {
   return typeof id === "string" && id.length > 0;
 };

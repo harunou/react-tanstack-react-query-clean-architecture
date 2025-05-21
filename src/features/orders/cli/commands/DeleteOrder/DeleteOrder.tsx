@@ -1,9 +1,9 @@
 import { memo, useEffect, type FC } from "react";
 import { useController } from "./hooks/useController";
-import { useLogRenderer } from "../../hooks/useLogRenderer";
+import { useConsoleRenderer } from "../../hooks/useConsoleRenderer";
 
 export const DeleteOrder: FC = memo(() => {
-  const renderer = useLogRenderer();
+  const renderer = useConsoleRenderer();
   const controller = useController();
 
   useEffect(() => {

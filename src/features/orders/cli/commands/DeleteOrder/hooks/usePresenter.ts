@@ -1,4 +1,4 @@
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useCallback } from "react";
 import { useGetOrdersOptions } from "../../../../gateways";
 import { useOrdersResourceSelector } from "../../../../hooks/selectors";
@@ -6,13 +6,13 @@ import type { OrderEntityId, OrderEntity } from "../../../../types";
 import type { ViewModel } from "../DeleteOrder.types";
 
 const useOrderIdsSelector = () => {
-  const queryClient = useQueryClient();
   const resource = useOrdersResourceSelector();
   const options = useGetOrdersOptions(resource);
+  const { refetch } = useQuery({ ...options });
   return useCallback(async (): Promise<OrderEntityId[]> => {
-    const orders = await queryClient.fetchQuery(options);
+    const { data: orders = [] } = await refetch();
     return orders.map((order: OrderEntity) => order.id);
-  }, [options, queryClient]);
+  }, [refetch]);
 };
 
 export const usePresenter = () => {
