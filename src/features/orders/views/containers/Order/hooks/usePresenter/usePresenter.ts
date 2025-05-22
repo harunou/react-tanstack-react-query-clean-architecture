@@ -1,16 +1,20 @@
 import { useMemo } from "react";
 import type { Presenter } from "../../Order.types";
-import type { OrderEntityId } from "../../../../../types";
+import type { ItemEntity, OrderEntityId } from "../../../../../types";
 import {
   useOrderByIdSelector,
   useIsLastOrderId,
   useIsOrdersProcessingSelector,
 } from "../../../../../hooks/selectors";
 
+const ITEMS_FALLBACK: ItemEntity[] = [];
+
 export const usePresenter = (params: { orderId: OrderEntityId }): Presenter => {
   const order = useOrderByIdSelector(params.orderId);
   const isLastOrder = useIsLastOrderId(params.orderId);
   const isProcessingOrders = useIsOrdersProcessingSelector();
+
+  const items = order?.itemEntities ?? ITEMS_FALLBACK;
 
   return useMemo(() => {
     if (!order) {
@@ -22,9 +26,9 @@ export const usePresenter = (params: { orderId: OrderEntityId }): Presenter => {
       hasOrder: true,
       userId: order.userId,
       orderId: order.id,
-      itemIds: order.itemEntities.map((itemEntity) => itemEntity.id),
+      itemIds: items.map((itemEntity) => itemEntity.id),
       isLastOrder,
       isDeleteOrderButtonDisabled: isProcessingOrders,
     };
-  }, [isLastOrder, isProcessingOrders, order]);
+  }, [isLastOrder, isProcessingOrders, order, items]);
 };
