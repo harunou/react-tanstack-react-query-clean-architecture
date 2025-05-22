@@ -4,6 +4,24 @@ import { useGetOrdersOptions } from "../../../../gateways";
 import { useOrdersResourceSelector } from "../../../../hooks/selectors";
 import type { OrderEntityId, OrderEntity } from "../../../../types";
 import type { ViewModel } from "../DeleteOrder.types";
+import type { UseCaseResult } from "../../../../../../@types";
+
+type PresenterParams = { orderId: OrderEntityId; result: UseCaseResult };
+
+export const usePresenter = () => {
+  const selectOrderIds = useOrderIdsSelector();
+  return useCallback(
+    async (params: PresenterParams): Promise<ViewModel> => {
+      if (params.result) {
+        return params.result;
+      }
+      const data = await selectOrderIds();
+      const ids = data.map((id: OrderEntityId) => `"${id}"`);
+      return `Order with id "${params.orderId}" has been deleted.\nAvailable order ids: ${ids.join(", ")}`;
+    },
+    [selectOrderIds],
+  );
+};
 
 const useOrderIdsSelector = () => {
   const resource = useOrdersResourceSelector();
@@ -13,16 +31,4 @@ const useOrderIdsSelector = () => {
     const { data: orders = [] } = await refetch();
     return orders.map((order: OrderEntity) => order.id);
   }, [refetch]);
-};
-
-export const usePresenter = () => {
-  const selectOrderIds = useOrderIdsSelector();
-  return useCallback(
-    async (id: OrderEntityId): Promise<ViewModel> => {
-      const data = await selectOrderIds();
-      const ids = data.map((id: OrderEntityId) => `"${id}"`);
-      return `Order with id "${id}" has been deleted.\nAvailable order ids: ${ids.join(", ")}`;
-    },
-    [selectOrderIds],
-  );
 };

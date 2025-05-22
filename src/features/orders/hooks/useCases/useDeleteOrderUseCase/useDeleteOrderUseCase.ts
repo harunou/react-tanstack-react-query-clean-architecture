@@ -11,7 +11,14 @@ export const useDeleteOrderUseCase = (): UseCase<{ orderId: OrderEntityId }> => 
 
   const execute = useCallback(
     async (params: { orderId: OrderEntityId }) => {
-      await deleteOrder(params);
+      try {
+        await deleteOrder(params);
+      } catch (e) {
+        if (e instanceof Error) {
+          return e;
+        }
+        return new Error("Unknown error");
+      }
     },
     [deleteOrder],
   );

@@ -1,3 +1,5 @@
-export type UseCase<T = void> = {
-  execute: (params: T) => Promise<void>;
+export type UseCaseResult<T = void> = T | Error;
+
+export type UseCase<T = void, R = void> = {
+  execute: (params: T) => Promise<UseCaseResult<R>>;
 };

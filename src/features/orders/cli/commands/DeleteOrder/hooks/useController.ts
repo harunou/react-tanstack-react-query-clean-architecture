@@ -9,18 +9,11 @@ export const useController = (): DeleteOrderController => {
   const { execute: executeDeleteOrderUseCase } = useDeleteOrderUseCase();
   return useCallback(
     async (id: unknown) => {
-      try {
-        if (!isOrderEntityId(id)) {
-          throw new Error("Invalid ID");
-        }
-        await executeDeleteOrderUseCase({ orderId: id });
-        return presenter(id);
-      } catch (error) {
-        if (error instanceof Error) {
-          return error;
-        }
-        return "Unknown error";
+      if (!isOrderEntityId(id)) {
+        return "Invalid order id";
       }
+      const result = await executeDeleteOrderUseCase({ orderId: id });
+      return presenter({ orderId: id, result });
     },
     [executeDeleteOrderUseCase, presenter],
   );
