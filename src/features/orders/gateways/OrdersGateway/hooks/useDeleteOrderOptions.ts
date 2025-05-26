@@ -4,9 +4,11 @@ import { useDeleteOrderKey } from "./useDeleteOrderKey";
 import { useGetOrdersKey } from "./useGetOrdersKey";
 import { mutationOptions } from "../../../../../utils";
 import { useOrdersGateway } from "./useOrdersGateway";
+import { useGatewayResource } from "./useGatewayResource";
 
-export const useDeleteOrderOptions = (resource: OrdersResource) => {
+export const useDeleteOrderOptions = (forceResource?: OrdersResource) => {
   const queryClient = useQueryClient();
+  const resource = useGatewayResource(forceResource);
   const mutationKey = useDeleteOrderKey(resource);
   const getOrdersKey = useGetOrdersKey(resource);
   const gateway = useOrdersGateway(resource);
