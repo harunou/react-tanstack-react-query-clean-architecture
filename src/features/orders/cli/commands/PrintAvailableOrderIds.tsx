@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { type FC, memo, useCallback, useEffect } from "react";
 import { useGetOrdersOptions } from "../../gateways";
-import { useOrdersResourceSelector } from "../../hooks/selectors";
 import { useConsoleRenderer } from "../hooks/useConsoleRenderer";
 
 declare global {
@@ -13,8 +12,7 @@ declare global {
 export type PrintAvailableOrderIdsController = () => Promise<string | Error>;
 
 const useController = (): PrintAvailableOrderIdsController => {
-  const resource = useOrdersResourceSelector();
-  const { refetch } = useQuery({ ...useGetOrdersOptions(resource) });
+  const { refetch } = useQuery({ ...useGetOrdersOptions() });
   return useCallback(async () => {
     try {
       const { data: orders = [] } = await refetch();

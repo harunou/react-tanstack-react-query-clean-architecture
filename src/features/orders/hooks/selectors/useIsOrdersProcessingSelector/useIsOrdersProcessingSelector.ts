@@ -1,12 +1,15 @@
 import { useIsMutating, useQuery } from "@tanstack/react-query";
-import { useOrdersResourceSelector } from "../useOrdersResourceSelector";
-import { useDeleteOrderItemOptions, useGetOrdersOptions } from "../../../gateways";
+import {
+  useDeleteOrderItemOptions,
+  useDeleteOrderOptions,
+  useGetOrdersOptions,
+} from "../../../gateways";
 
 export const useIsOrdersProcessingSelector = (): boolean => {
-  const resource = useOrdersResourceSelector();
   const { isLoading: isLoadingWhileGetOrders } = useQuery({
-    ...useGetOrdersOptions(resource),
+    ...useGetOrdersOptions(),
   });
-  const isDeletingOrderItem = useIsMutating({ ...useDeleteOrderItemOptions(resource) });
-  return isLoadingWhileGetOrders || !!isDeletingOrderItem;
+  const isDeletingOrderItem = useIsMutating({ ...useDeleteOrderItemOptions() });
+  const isDeletingOrder = useIsMutating({ ...useDeleteOrderOptions() });
+  return isLoadingWhileGetOrders || !!isDeletingOrderItem || !!isDeletingOrder;
 };

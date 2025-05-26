@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { LocalOrdersGateway } from "./LocalOrdersGateway";
 import type { OrderEntity } from "../../../types";
 import { itemEntityFactory, makeOrderEntities, orderEntityFactory } from "../../../utils/testing";
@@ -12,17 +12,12 @@ interface LocalTestContext {
 
 describe(`${LocalOrdersGateway.name}`, () => {
   beforeEach<LocalTestContext>((context) => {
-    vi.useFakeTimers();
     mockSleep();
     orderEntityFactory.resetCount();
     itemEntityFactory.resetCount();
     const orders = makeOrderEntities();
     context.orders = orders;
     context.localOrdersGateway = new LocalOrdersGateway(orders);
-  });
-
-  afterEach(() => {
-    vi.useRealTimers();
   });
 
   describe("fetchOrders", () => {

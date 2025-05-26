@@ -1,15 +1,15 @@
 import type { ItemEntityId, OrderEntityId, OrdersResource } from "../../../types";
-import { useDeleteOrderKey } from "./useDeleteOrderKey";
 import { useGetOrdersKey } from "./useGetOrdersKey";
 import { useQueryClient } from "@tanstack/react-query";
 import { mutationOptions } from "../../../../../utils";
 import { useOrdersGateway } from "./useOrdersGateway";
 import { useGatewayResource } from "./useGatewayResource";
+import { useDeleteOrderItemKey } from "./useDeleteOrderItemKey";
 
 export const useDeleteOrderItemOptions = (forceResource?: OrdersResource) => {
   const queryClient = useQueryClient();
   const resource = useGatewayResource(forceResource);
-  const mutationKey = useDeleteOrderKey(resource);
+  const mutationKey = useDeleteOrderItemKey(resource);
   const getOrdersKey = useGetOrdersKey(resource);
   const gateway = useOrdersGateway(resource);
 

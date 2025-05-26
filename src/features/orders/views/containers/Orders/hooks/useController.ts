@@ -7,8 +7,8 @@ import { useMemoRecord } from "../../../../../../utils";
 
 export const useController = (): Controller => {
   const queryClient = useQueryClient();
-  const ordersGatewayType = useOrdersResourceSelector();
-  const key = useGetOrdersKey(ordersGatewayType);
+  const resource = useOrdersResourceSelector();
+  const key = useGetOrdersKey(resource);
 
   const moduleDestroyed = useCallback(() => {
     queryClient.cancelQueries({ queryKey: key });

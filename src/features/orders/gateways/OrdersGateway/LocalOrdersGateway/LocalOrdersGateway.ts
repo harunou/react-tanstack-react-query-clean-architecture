@@ -1,4 +1,4 @@
-import { sleepWithScheduler } from "../../../../../utils";
+import { sleep } from "../../../../../utils";
 import type { OrdersGateway, OrderEntity, OrderEntityId } from "../../../types";
 
 export class LocalOrdersGateway implements OrdersGateway {
@@ -22,13 +22,13 @@ export class LocalOrdersGateway implements OrdersGateway {
   }
 
   async getOrders(): Promise<OrderEntity[]> {
-    await sleepWithScheduler(500);
+    await sleep(500);
 
     return Array.from(this.orders.values());
   }
 
   async deleteOrder(orderId: OrderEntityId): Promise<void> {
-    await sleepWithScheduler(300);
+    await sleep(300);
 
     if (!this.orders.has(orderId)) {
       throw new Error(`Order with id ${orderId} not found`);
@@ -37,7 +37,7 @@ export class LocalOrdersGateway implements OrdersGateway {
   }
 
   async deleteItem(orderId: OrderEntityId, itemId: string): Promise<void> {
-    await sleepWithScheduler(700);
+    await sleep(700);
 
     const order = this.orders.get(orderId);
 
