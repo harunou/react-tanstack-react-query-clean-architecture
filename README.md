@@ -111,9 +111,20 @@ Dependency graph of the code units.
 ├── cli
 │   ├── cli.tsx
 │   ├── commands
-│   │   ├── DeleteOrder.tsx
+│   │   ├── DeleteOrder
+│   │   │   ├── DeleteOrder.tsx
+│   │   │   ├── DeleteOrder.types.tsx
+│   │   │   ├── hooks
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── useController.ts
+│   │   │   │   └── usePresenter.ts
+│   │   │   └── index.ts
 │   │   ├── index.ts
+│   │   ├── PrintAvailableOrderIds.tsx
+│   │   ├── PrintOrdersResource.tsx
 │   │   └── SwitchOrdersResource.tsx
+│   ├── hooks
+│   │   └── useConsoleRenderer.ts
 │   └── index.ts
 ├── gateways
 │   ├── index.ts
