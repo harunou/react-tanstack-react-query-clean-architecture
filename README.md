@@ -27,13 +27,13 @@ typical frontend application with a store and API integration. The
 implementation can be used with any modern reactive frontend framework, like
 React, Vue, Svelte, or Angular.
 
-![basic-clean-architecture-implementation](docs/ca-fe-reactive-framework-basic.svg)
+![basic-clean-architecture-implementation](docs/fe-ca-diagram.svg)
 
 The next diagram represents an extended implementation of Clean Architecture for
 a typical frontend application. The diagram shows additional units into which an
 application can be factored.
 
-![advanced-clean-architecture-implementation](docs/ca-fe-reactive-framework-extended.svg)
+![advanced-clean-architecture-implementation](docs/fe-ca-diagram-extended.svg)
 
 > NOTE: the double lines on both diagrams are representing the boundaries
 > between the units. Typically the data that crosses the boundaries is simple
