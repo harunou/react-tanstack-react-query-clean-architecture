@@ -17,8 +17,6 @@ export const useDeleteOrderItemOptions = (forceResource?: OrdersResource) => {
     mutationKey,
     mutationFn: (params: { orderId: OrderEntityId; itemId: ItemEntityId }) =>
       gateway.deleteItem(params.orderId, params.itemId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: getOrdersKey });
-    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: getOrdersKey }),
   });
 };

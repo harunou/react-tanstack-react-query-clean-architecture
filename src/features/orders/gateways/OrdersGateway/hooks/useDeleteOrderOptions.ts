@@ -13,11 +13,15 @@ export const useDeleteOrderOptions = (forceResource?: OrdersResource) => {
   const getOrdersKey = useGetOrdersKey(resource);
   const gateway = useOrdersGateway(resource);
 
+  // NOTE(harunou): to make the view updated correctly the mutationFn and
+  // onSuccess should be async functions
   return mutationOptions({
     mutationKey,
-    mutationFn: (params: { orderId: OrderEntityId }) => gateway.deleteOrder(params.orderId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: getOrdersKey });
+    mutationFn: async (params: { orderId: OrderEntityId }) => {
+      await gateway.deleteOrder(params.orderId);
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: getOrdersKey });
     },
   });
 };

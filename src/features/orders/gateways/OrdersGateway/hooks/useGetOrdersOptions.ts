@@ -10,7 +10,7 @@ export const useGetOrdersOptions = (forceResource?: OrdersResource) => {
   const gateway = useOrdersGateway(resource);
 
   return queryOptions({
-    queryFn: () => gateway.getOrders(),
+    queryFn: async () => await gateway.getOrders(),
     queryKey,
   });
 };

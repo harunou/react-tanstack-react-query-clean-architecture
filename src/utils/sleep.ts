@@ -1,12 +1,17 @@
 const DEFAULT_DELAY_MS = 0;
 
-export const sleepWithTimeout = async (time = DEFAULT_DELAY_MS): Promise<void> => {
+export const sleep = async (ms = DEFAULT_DELAY_MS): Promise<void> => {
+  void sleepWithScheduler;
+  return sleepWithTimeout(ms);
+};
+
+const sleepWithTimeout = async (ms: number): Promise<void> => {
   await new Promise((res) => {
-    setTimeout(res, time);
+    setTimeout(res, ms);
   });
 };
 
-export const sleepWithScheduler = async (ms: number): Promise<void> => {
+const sleepWithScheduler = async (ms: number): Promise<void> => {
   const start = performance.now();
 
   if ("scheduler" in window) {

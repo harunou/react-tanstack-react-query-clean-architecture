@@ -1,29 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 import { useGetOrdersOptions } from "../../../gateways";
 import type { OrderEntity } from "../../../types";
+import { useCallback } from "react";
 
 const DEFAULT_TOTAL_ITEMS_QUANTITY = 0;
 
 export const useTotalItemsQuantitySelector = () => {
   const { data: totalItemsQuantity = DEFAULT_TOTAL_ITEMS_QUANTITY } = useQuery({
     ...useGetOrdersOptions(),
-    // NOTE: Without the structuralSharing patch, the selector does not work as
-    // expected. This issue may not originate from this part of the code, but
-    // adding structuralSharing here is a workaround. Further investigation
-    // might be needed to identify the root cause elsewhere.
-    structuralSharing: (oldData, newData) => {
+    // NOTE(harunou): memoization select is not working without this
+    structuralSharing(oldData, newData) {
       if (oldData === newData) {
         return oldData;
       }
       return newData;
     },
-    select: (orderEntities: OrderEntity[]) => {
+    select: useCallback((orderEntities: OrderEntity[]) => {
       return orderEntities.reduce(
         (acc, entity) =>
           acc + entity.itemEntities.reduce((itemAcc, item) => itemAcc + item.quantity, 0),
         0,
       );
-    },
+    }, []),
   });
 
   return totalItemsQuantity;
