@@ -41,10 +41,6 @@ application can be factored.
 
 ## Definition of units
 
-- **Enterprise Business Entity (EB Entity)**: Unit that encapsulates enterprise
-  business rules and data.
-- **Application Business Entity (AB Entity)**: Unit that encapsulates
-  application-specific business rules and data.
 - **Entities Store**: An aggregate unit that maintains a collection of enterprise
   business entities and/or application business entities and their states.
 - **Use Case Interactor**: Unit that orchestrates the flow of data in the
@@ -73,10 +69,14 @@ application can be factored.
 
 ## Definition of concepts utilized by the units
 
+- **Enterprise Business Entity**: Unit that encapsulates enterprise
+  business rules and data.
 - **Enterprise Business Rules and Data**: The most general and high-level rules
   and data that would exist even if the application didn't. These are
   enterprise-wide rules that rarely change and are independent of any specific
   application.
+- **Application Business Entity**: Unit that encapsulates
+  application-specific business rules and data.
 - **Application Business Rules and Data**: Rules and data specific to the
   application's functionality and presentation. This includes how business
   concepts are presented to users, interaction flows, UI state management, and
