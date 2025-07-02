@@ -76,7 +76,7 @@ describe(`${useDeleteOrderUseCase.name}`, () => {
 
   it<LocalTestContext>("deletes order by id", async (context) => {
     const orderToDelete = context.orders.at(2)!;
-    const orders0 = { ...context.orders };
+    const orders0 = [...context.orders];
     const orders1 = context.orders.filter((order) => order.id !== orderToDelete.id);
 
     context.gateway.getOrders.mockResolvedValueOnce(orders0).mockResolvedValueOnce(orders1);
