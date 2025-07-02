@@ -2,17 +2,17 @@ import { useCallback } from "react";
 import type { Controller } from "../Orders.types";
 import { useQueryClient } from "@tanstack/react-query";
 import { useOrdersResourceSelector } from "../../../../hooks/selectors";
-import { useGetOrdersKey } from "../../../../repositories";
 import { useMemoRecord } from "../../../../../../utils";
+import { keys } from "../../../../repositories";
 
 export const useController = (): Controller => {
   const queryClient = useQueryClient();
   const resource = useOrdersResourceSelector();
-  const key = useGetOrdersKey(resource);
+  const getOrdersKey = keys.makeGetOrdersKey(resource);
 
   const moduleDestroyed = useCallback(() => {
-    queryClient.cancelQueries({ queryKey: key });
-  }, [key, queryClient]);
+    queryClient.cancelQueries({ queryKey: getOrdersKey });
+  }, [getOrdersKey, queryClient]);
 
   return useMemoRecord({ moduleDestroyed });
 };
