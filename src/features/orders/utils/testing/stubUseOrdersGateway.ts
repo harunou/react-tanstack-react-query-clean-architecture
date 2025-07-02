@@ -1,6 +1,6 @@
 import { type Mocked, vi } from "vitest";
-import * as makeOrdersServiceModule from "../../repositories/OrdersRepository/OrdersService/makeOrdersService";
-import type { OrdersService } from "../../repositories/OrdersRepository/OrdersService/OrdersService.types";
+import * as makeOrdersServiceModule from "../../repositories/ordersRepository/OrdersService/makeOrdersService";
+import type { OrdersService } from "../../repositories/ordersRepository/OrdersService/OrdersService.types";
 
 export type MockedOrdersService = Mocked<OrdersService>;
 

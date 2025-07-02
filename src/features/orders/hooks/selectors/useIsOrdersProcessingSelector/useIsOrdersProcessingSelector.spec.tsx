@@ -8,7 +8,7 @@ import { type MockedOrdersService, stubMakeOrdersService } from "../../../utils/
 import { makeComponentFixture } from "../../../utils/testing/makeComponentFixture";
 import { useIsOrdersProcessingSelector } from "./useIsOrdersProcessingSelector";
 import { render, screen } from "@testing-library/react";
-import { ordersRepository } from "../../../repositories/OrdersRepository";
+import { ordersRepository } from "../../../repositories/ordersRepository";
 
 interface LocalTestContext {
   Fixture: FC<PropsWithChildren<unknown>>;
