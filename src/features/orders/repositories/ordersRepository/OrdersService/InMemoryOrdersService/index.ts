@@ -1,1 +1,1 @@
-export { LocalOrdersGateway } from "./LocalOrdersGateway";
+export { InMemoryOrdersService as LocalOrdersGateway } from "./InMemoryOrdersService";

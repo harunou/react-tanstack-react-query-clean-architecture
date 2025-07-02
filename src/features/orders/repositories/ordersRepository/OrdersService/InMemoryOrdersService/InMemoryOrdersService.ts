@@ -2,14 +2,14 @@ import { sleep } from "../../../../../../utils";
 import type { OrderEntity, OrderEntityId } from "../../../../types";
 import type { OrdersService } from "../OrdersService.types";
 
-export class LocalOrdersGateway implements OrdersService {
-  static instance: LocalOrdersGateway | null = null;
-  static make(orders: OrderEntity[] = []): LocalOrdersGateway {
-    if (LocalOrdersGateway.instance === null) {
-      LocalOrdersGateway.instance = new LocalOrdersGateway(orders);
+export class InMemoryOrdersService implements OrdersService {
+  static instance: InMemoryOrdersService | null = null;
+  static make(orders: OrderEntity[] = []): InMemoryOrdersService {
+    if (InMemoryOrdersService.instance === null) {
+      InMemoryOrdersService.instance = new InMemoryOrdersService(orders);
     }
 
-    return LocalOrdersGateway.instance;
+    return InMemoryOrdersService.instance;
   }
 
   private orders = new Map<OrderEntityId, OrderEntity>();

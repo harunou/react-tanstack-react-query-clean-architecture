@@ -3,9 +3,9 @@ import type { ItemEntityId, OrderEntity, OrderEntityId } from "../../../../types
 import type { OrdersService } from "../OrdersService.types";
 import { toOrderEntity } from "./mappers";
 
-export class RemoteOrdersGateway implements OrdersService {
-  static make(): RemoteOrdersGateway {
-    return new RemoteOrdersGateway(OrdersApi.make());
+export class RemoteOrdersService implements OrdersService {
+  static make(): RemoteOrdersService {
+    return new RemoteOrdersService(OrdersApi.make());
   }
 
   constructor(private api: OrdersApi) {}
