@@ -12,4 +12,5 @@ export interface OrdersRepository {
     forceResource?: OrdersResource,
   ): UseMutationResult<void, Error, { orderId: OrderEntityId; itemId: ItemEntityId }>;
   useIsDeletingOrderItemMutating(): boolean;
+  useCancelAllQueries(): () => void;
 }

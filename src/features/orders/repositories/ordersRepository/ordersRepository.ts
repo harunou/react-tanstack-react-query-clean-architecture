@@ -1,13 +1,13 @@
 import type { OrderEntityId, ItemEntityId } from "../../types";
 import { useQuery, useMutation, useQueryClient, useIsMutating } from "@tanstack/react-query";
 import { useGatewayResource } from "./hooks";
-import { keys } from "./keys";
+import { ordersRepositoryKeys } from "./ordersRepositoryKeys";
 import { makeOrdersService } from "./OrdersService";
 import type { OrdersRepository } from "../../types";
 
 const useGetOrders: OrdersRepository["useGetOrders"] = (forceResource) => {
   const resource = useGatewayResource(forceResource);
-  const getOrdersKey = keys.makeGetOrdersKey(resource);
+  const getOrdersKey = ordersRepositoryKeys.makeGetOrdersKey(resource);
   const gateway = makeOrdersService(resource);
 
   return useQuery({
@@ -19,8 +19,8 @@ const useGetOrders: OrdersRepository["useGetOrders"] = (forceResource) => {
 const useDeleteOrder: OrdersRepository["useDeleteOrder"] = (forceResource) => {
   const queryClient = useQueryClient();
   const resource = useGatewayResource(forceResource);
-  const deleteOrderKey = keys.makeDeleteOrderKey(resource);
-  const getOrdersKey = keys.makeGetOrdersKey(resource);
+  const deleteOrderKey = ordersRepositoryKeys.makeDeleteOrderKey(resource);
+  const getOrdersKey = ordersRepositoryKeys.makeGetOrdersKey(resource);
   const gateway = makeOrdersService(resource);
 
   return useMutation({
@@ -37,8 +37,8 @@ const useDeleteOrder: OrdersRepository["useDeleteOrder"] = (forceResource) => {
 const useDeleteOrderItem: OrdersRepository["useDeleteOrderItem"] = (forceResource) => {
   const queryClient = useQueryClient();
   const resource = useGatewayResource(forceResource);
-  const deleteOrderItemKey = keys.makeDeleteOrderItemKey(resource);
-  const getOrdersKey = keys.makeGetOrdersKey(resource);
+  const deleteOrderItemKey = ordersRepositoryKeys.makeDeleteOrderItemKey(resource);
+  const getOrdersKey = ordersRepositoryKeys.makeGetOrdersKey(resource);
   const gateway = makeOrdersService(resource);
 
   return useMutation({
@@ -50,11 +50,23 @@ const useDeleteOrderItem: OrdersRepository["useDeleteOrderItem"] = (forceResourc
 };
 
 const useIsDeletingOrderItemMutating: OrdersRepository["useIsDeletingOrderItemMutating"] = () => {
-  return !!useIsMutating({ mutationKey: keys.makeDeleteOrderItemKey(useGatewayResource()) });
+  return !!useIsMutating({
+    mutationKey: ordersRepositoryKeys.makeDeleteOrderItemKey(useGatewayResource()),
+  });
 };
 
 const useIsDeletingOrderMutating: OrdersRepository["useIsDeletingOrderMutating"] = () => {
-  return !!useIsMutating({ mutationKey: keys.makeDeleteOrderKey(useGatewayResource()) });
+  return !!useIsMutating({
+    mutationKey: ordersRepositoryKeys.makeDeleteOrderKey(useGatewayResource()),
+  });
+};
+
+const useCancelAllQueries: OrdersRepository["useCancelAllQueries"] = () => {
+  const queryClient = useQueryClient();
+  return () =>
+    queryClient.cancelQueries({
+      queryKey: ordersRepositoryKeys.ORDERS_NAMESPACE,
+    });
 };
 
 export const ordersRepository: OrdersRepository = {
@@ -63,4 +75,5 @@ export const ordersRepository: OrdersRepository = {
   useDeleteOrderItem,
   useIsDeletingOrderItemMutating,
   useIsDeletingOrderMutating,
+  useCancelAllQueries,
 };

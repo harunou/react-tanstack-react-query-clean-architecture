@@ -10,7 +10,8 @@ const makeDeleteOrderItemKey = (resource: OrdersResource) =>
 const makeDeleteOrderKey = (resource: OrdersResource) =>
   [...ORDERS_NAMESPACE, resource, "order", "delete"] as const;
 
-export const keys = {
+export const ordersRepositoryKeys = {
+  ORDERS_NAMESPACE,
   makeGetOrdersKey,
   makeDeleteOrderKey,
   makeDeleteOrderItemKey,
