@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import type { OrderEntity } from "../../../types";
-import { makeOrderEntities, resetOrderEntitiesFactories } from "../../../utils/testing";
-import { makeItemEntityId, makeOrderEntityId } from "../../../utils";
+import type { OrderEntity } from "../../types";
+import { makeOrderEntities, resetOrderEntitiesFactories } from "../../utils/testing";
+import { makeItemEntityId, makeOrderEntityId } from "../../utils";
 import { select } from "./useIsLastItemIdSelector";
 
 interface LocalTestContext {

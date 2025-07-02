@@ -5,7 +5,7 @@ import {
   useOrderByIdSelector,
   useIsLastOrderId,
   useIsOrdersProcessingSelector,
-} from "../../../../../hooks/selectors";
+} from "../../../../../selectors";
 
 const ITEMS_FALLBACK: ItemEntity[] = [];
 

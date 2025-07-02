@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import type { Presenter } from "../OrderItem.types";
 import type { ItemEntityId, OrderEntityId } from "../../../../types";
-import { useIsLastItemIdSelector, useItemByIdSelector } from "../../../../hooks/selectors";
+import { useIsLastItemIdSelector, useItemByIdSelector } from "../../../../selectors";
 
 export const usePresenter = (params: {
   orderId: OrderEntityId;

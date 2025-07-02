@@ -1,4 +1,4 @@
-import { ordersRepository } from "../../../repositories";
+import { ordersRepository } from "../../repositories";
 
 export const useIsOrdersProcessingSelector = (): boolean => {
   const { isLoading: isLoadingWhileGetOrders } = ordersRepository.useGetOrders();

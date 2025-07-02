@@ -1,5 +1,5 @@
-import type { OrderEntity, OrderEntityId } from "../../types";
-import { ordersRepository } from "../../repositories";
+import type { OrderEntity, OrderEntityId } from "../types";
+import { ordersRepository } from "../repositories";
 
 const DEFAULT_ORDERS: OrderEntity[] = [];
 

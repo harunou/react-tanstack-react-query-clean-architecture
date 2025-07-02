@@ -10,7 +10,7 @@ import {
   stubMakeOrdersService,
 } from "../../utils/testing";
 import { makeComponentFixture } from "../../utils/testing/makeComponentFixture";
-import { useOrderIdsSelector } from "../../hooks/selectors";
+import { useOrderIdsSelector } from "../../selectors";
 import { output } from "../../../../utils/testing";
 import { render, screen } from "@testing-library/react";
 import { makeOrderEntityId } from "../../utils";

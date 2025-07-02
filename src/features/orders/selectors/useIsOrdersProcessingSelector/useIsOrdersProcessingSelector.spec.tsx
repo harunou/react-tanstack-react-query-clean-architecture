@@ -1,14 +1,14 @@
 import type { UserEvent } from "@testing-library/user-event";
 import type { FC, PropsWithChildren } from "react";
 import { describe, beforeEach, vi, afterEach, it, expect } from "vitest";
-import { makeDeferred, output } from "../../../../../utils/testing";
-import type { OrderEntity } from "../../../types";
-import { makeOrderEntityId, makeItemEntityId } from "../../../utils";
-import { type MockedOrdersService, stubMakeOrdersService } from "../../../utils/testing";
-import { makeComponentFixture } from "../../../utils/testing/makeComponentFixture";
+import { makeDeferred, output } from "../../../../utils/testing";
+import type { OrderEntity } from "../../types";
+import { makeOrderEntityId, makeItemEntityId } from "../../utils";
+import { type MockedOrdersService, stubMakeOrdersService } from "../../utils/testing";
+import { makeComponentFixture } from "../../utils/testing/makeComponentFixture";
 import { useIsOrdersProcessingSelector } from "./useIsOrdersProcessingSelector";
 import { render, screen } from "@testing-library/react";
-import { ordersRepository } from "../../../repositories/ordersRepository";
+import { ordersRepository } from "../../repositories/ordersRepository";
 
 interface LocalTestContext {
   Fixture: FC<PropsWithChildren<unknown>>;
