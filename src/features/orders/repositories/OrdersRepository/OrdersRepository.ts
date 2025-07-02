@@ -1,5 +1,5 @@
 import type { OrderEntityId, ItemEntityId } from "../../types";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient, useIsMutating } from "@tanstack/react-query";
 import { useGatewayResource } from "./hooks";
 import { keys } from "./keys";
 import { makeOrdersService } from "./OrdersService";
@@ -49,8 +49,18 @@ const useDeleteOrderItem: OrdersRepository["useDeleteOrderItem"] = (forceResourc
   });
 };
 
-export const repository: OrdersRepository = {
+const useIsDeletingOrderItemMutating: OrdersRepository["useIsDeletingOrderItemMutating"] = () => {
+  return !!useIsMutating({ mutationKey: keys.makeDeleteOrderItemKey(useGatewayResource()) });
+};
+
+const useIsDeletingOrderMutating: OrdersRepository["useIsDeletingOrderMutating"] = () => {
+  return !!useIsMutating({ mutationKey: keys.makeDeleteOrderKey(useGatewayResource()) });
+};
+
+export const ordersRepository: OrdersRepository = {
   useGetOrders,
   useDeleteOrder,
   useDeleteOrderItem,
+  useIsDeletingOrderItemMutating,
+  useIsDeletingOrderMutating,
 };

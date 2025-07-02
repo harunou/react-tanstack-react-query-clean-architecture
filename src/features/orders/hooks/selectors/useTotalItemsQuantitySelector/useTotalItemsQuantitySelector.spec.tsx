@@ -2,10 +2,9 @@ import { describe, it, expect, vi, beforeEach, afterEach, type Mocked } from "vi
 import { useTotalItemsQuantitySelector } from "./useTotalItemsQuantitySelector";
 import { render, renderHook, screen } from "@testing-library/react";
 import { memo, type FC, type PropsWithChildren } from "react";
-import { useMutation } from "@tanstack/react-query";
 import type { UserEvent } from "@testing-library/user-event";
 import { output } from "../../../../../utils/testing";
-import { useDeleteOrderOptions } from "../../../repositories";
+import { ordersRepository } from "../../../repositories";
 import type { OrdersGateway, OrderEntity } from "../../../types";
 import { makeOrderEntityId } from "../../../utils";
 import {
@@ -87,7 +86,7 @@ describe(`${useTotalItemsQuantitySelector.name}`, () => {
     const fakeOrderId = makeOrderEntityId("9000");
     const Component: FC = memo(() => {
       const quantity = useTotalItemsQuantitySelector();
-      const { mutateAsync: deleteOrder } = useMutation({ ...useDeleteOrderOptions("local") });
+      const { mutateAsync: deleteOrder } = ordersRepository.useDeleteOrder("local");
       return (
         <>
           <div data-testid={outputTestId}>

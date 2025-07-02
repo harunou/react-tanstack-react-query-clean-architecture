@@ -1,15 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { useGetOrdersOptions } from "../../repositories";
 import type { OrderEntity, OrderEntityId } from "../../types";
-import { useCallback } from "react";
+import { ordersRepository } from "../../repositories";
 
-const DEFAULT_ORDER_IDS: OrderEntityId[] = [];
+const DEFAULT_ORDERS: OrderEntity[] = [];
 
-export const useOrderIdsSelector = () => {
-  const { data: orderIds = DEFAULT_ORDER_IDS } = useQuery({
-    ...useGetOrdersOptions(),
-    select: useCallback((orderEntities: OrderEntity[]) => orderEntities.map((d) => d.id), []),
-  });
+export const useOrderIdsSelector = (): OrderEntityId[] => {
+  const { data: orders = DEFAULT_ORDERS } = ordersRepository.useGetOrders();
 
-  return orderIds;
+  return orders.map((order) => order.id);
 };

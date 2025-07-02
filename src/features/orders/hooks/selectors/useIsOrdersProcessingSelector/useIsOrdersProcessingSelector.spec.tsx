@@ -8,8 +8,7 @@ import { stubMakeOrdersService } from "../../../utils/testing";
 import { makeComponentFixture } from "../../../utils/testing/makeComponentFixture";
 import { useIsOrdersProcessingSelector } from "./useIsOrdersProcessingSelector";
 import { render, screen } from "@testing-library/react";
-import { useMutation } from "@tanstack/react-query";
-import { useDeleteOrderItemOptions } from "../../../repositories/OrdersRepository";
+import { ordersRepository } from "../../../repositories/OrdersRepository";
 
 interface LocalTestContext {
   Fixture: FC<PropsWithChildren<unknown>>;
@@ -35,9 +34,7 @@ describe(`${useIsOrdersProcessingSelector.name}`, () => {
     const { Fixture, user } = makeComponentFixture();
     const Component: FC = () => {
       const isLoading = useIsOrdersProcessingSelector();
-      const { mutateAsync: deleteOrderItem } = useMutation({
-        ...useDeleteOrderItemOptions("local"),
-      });
+      const { mutateAsync: deleteOrderItem } = ordersRepository.useDeleteOrderItem("local");
       return (
         <>
           <button

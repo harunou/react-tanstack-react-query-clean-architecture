@@ -1,17 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import type { OrderEntity, OrderEntityId } from "../../types";
-import { useGetOrdersOptions } from "../../repositories";
-import { useCallback } from "react";
+import { ordersRepository } from "../../repositories";
 
-export const useOrderByIdSelector = (orderId: OrderEntityId) => {
-  const { data } = useQuery({
-    ...useGetOrdersOptions(),
-    select: useCallback(
-      (orderEntities: OrderEntity[]) =>
-        orderEntities.find((orderEntity) => orderEntity.id === orderId),
-      [orderId],
-    ),
-  });
+const DEFAULT_ORDERS: OrderEntity[] = [];
 
-  return data;
+export const useOrderByIdSelector = (orderId: OrderEntityId): OrderEntity | undefined => {
+  const { data = DEFAULT_ORDERS } = ordersRepository.useGetOrders();
+
+  return data.find((orderEntity) => orderEntity.id === orderId);
 };

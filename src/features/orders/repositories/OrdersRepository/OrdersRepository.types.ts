@@ -6,7 +6,9 @@ export interface OrdersRepository {
   useDeleteOrder(
     forceResource?: OrdersResource,
   ): UseMutationResult<void, Error, { orderId: OrderEntityId }>;
+  useIsDeletingOrderMutating(): boolean;
   useDeleteOrderItem(
     forceResource?: OrdersResource,
   ): UseMutationResult<void, Error, { orderId: OrderEntityId; itemId: ItemEntityId }>;
+  useIsDeletingOrderItemMutating(): boolean;
 }

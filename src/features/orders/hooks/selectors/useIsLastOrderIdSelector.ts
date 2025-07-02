@@ -1,16 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import type { OrderEntity, OrderEntityId } from "../../types";
-import { useGetOrdersOptions } from "../../repositories";
-import { useCallback } from "react";
+import { ordersRepository } from "../../repositories";
 
-export const useIsLastOrderId = (orderId: OrderEntityId) => {
-  const { data } = useQuery({
-    ...useGetOrdersOptions(),
-    select: useCallback(
-      (orderEntities: OrderEntity[]) => orderEntities.at(-1)?.id === orderId,
-      [orderId],
-    ),
-  });
+const DEFAULT_ORDERS: OrderEntity[] = [];
 
-  return data ?? false;
+export const useIsLastOrderId = (orderId: OrderEntityId): boolean => {
+  const { data = DEFAULT_ORDERS } = ordersRepository.useGetOrders();
+
+  return data.at(-1)?.id === orderId;
 };

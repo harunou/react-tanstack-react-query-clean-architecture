@@ -1,15 +1,8 @@
-import { useIsMutating, useQuery } from "@tanstack/react-query";
-import {
-  useDeleteOrderItemOptions,
-  useDeleteOrderOptions,
-  useGetOrdersOptions,
-} from "../../../repositories";
+import { ordersRepository } from "../../../repositories";
 
 export const useIsOrdersProcessingSelector = (): boolean => {
-  const { isLoading: isLoadingWhileGetOrders } = useQuery({
-    ...useGetOrdersOptions(),
-  });
-  const isDeletingOrderItem = useIsMutating({ ...useDeleteOrderItemOptions() });
-  const isDeletingOrder = useIsMutating({ ...useDeleteOrderOptions() });
+  const { isLoading: isLoadingWhileGetOrders } = ordersRepository.useGetOrders();
+  const isDeletingOrderItem = ordersRepository.useIsDeletingOrderItemMutating();
+  const isDeletingOrder = ordersRepository.useIsDeletingOrderMutating();
   return isLoadingWhileGetOrders || !!isDeletingOrderItem || !!isDeletingOrder;
 };
