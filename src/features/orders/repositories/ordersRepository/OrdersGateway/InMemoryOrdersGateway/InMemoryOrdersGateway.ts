@@ -38,8 +38,6 @@ export class InMemoryOrdersGateway implements OrdersGateway {
   }
 
   async deleteItem(orderId: OrderEntityId, itemId: string): Promise<void> {
-    await sleep(700);
-
     const order = this.orders.get(orderId);
 
     if (!order) {

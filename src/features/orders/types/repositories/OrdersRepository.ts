@@ -1,4 +1,4 @@
-import type { UseMutationResult, UseQueryResult } from "@tanstack/react-query";
+import type { MutationState, UseMutationResult, UseQueryResult } from "@tanstack/react-query";
 import type { OrderEntity, OrderEntityId, ItemEntityId } from "../entities";
 import type { OrdersResource } from "../OrdersResource";
 
@@ -7,10 +7,14 @@ export interface OrdersRepository {
   useDeleteOrder(
     forceResource?: OrdersResource,
   ): UseMutationResult<void, Error, { orderId: OrderEntityId }>;
-  useIsDeletingOrderMutating(): boolean;
   useDeleteOrderItem(
     forceResource?: OrdersResource,
   ): UseMutationResult<void, Error, { orderId: OrderEntityId; itemId: ItemEntityId }>;
+  useOrderItemMutationState(
+    orderId: OrderEntityId,
+    itemId: ItemEntityId,
+  ): Array<MutationState<void, Error, { orderId: OrderEntityId; itemId: ItemEntityId }>>;
+  useIsDeletingOrderMutating(): boolean;
   useIsDeletingOrderItemMutating(): boolean;
   useCancelAllQueries(): () => void;
 }

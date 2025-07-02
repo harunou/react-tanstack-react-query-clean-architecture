@@ -1,7 +1,14 @@
 import type { OrderEntityId, ItemEntityId, OrdersRepository } from "../../types";
-import { useQuery, useMutation, useQueryClient, useIsMutating } from "@tanstack/react-query";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  useIsMutating,
+  useMutationState,
+} from "@tanstack/react-query";
 import { useGatewayResource, useOrdersGateway } from "./hooks";
 import { ordersRepositoryKeys } from "./ordersRepositoryKeys";
+import { isOrderItemMutationVariables } from "./ordersRepository.utils";
 
 const useGetOrders: OrdersRepository["useGetOrders"] = (forceResource) => {
   const resource = useGatewayResource(forceResource);
@@ -67,11 +74,31 @@ const useCancelAllQueries: OrdersRepository["useCancelAllQueries"] = () => {
     });
 };
 
+const useOrderItemMutationState: OrdersRepository["useOrderItemMutationState"] = (
+  orderId: OrderEntityId,
+  itemId: ItemEntityId,
+) => {
+  return useMutationState({
+    filters: {
+      mutationKey: ordersRepositoryKeys.makeDeleteOrderItemKey(useGatewayResource()),
+      predicate(mutation) {
+        const variables = mutation.state.variables;
+        if (!isOrderItemMutationVariables(variables)) {
+          return false;
+        }
+
+        return variables.orderId === orderId && variables.itemId === itemId;
+      },
+    },
+  });
+};
+
 export const ordersRepository: OrdersRepository = {
   useGetOrders,
   useDeleteOrder,
   useDeleteOrderItem,
-  useIsDeletingOrderItemMutating,
   useIsDeletingOrderMutating,
+  useIsDeletingOrderItemMutating,
+  useOrderItemMutationState,
   useCancelAllQueries,
 };
