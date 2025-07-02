@@ -1,5 +1,5 @@
 import { type Mocked, vi } from "vitest";
-import * as makeOrdersGatewayModule from "../../repositories/ordersRepository/OrdersGateway/makeOrdersGateway";
+import * as useOrdersGatewayModule from "../../repositories/ordersRepository/hooks/useOrdersGateway";
 import type { OrdersGateway } from "../../repositories/ordersRepository/OrdersGateway/OrdersGateway.types";
 
 export type MockedOrdersGateway = Mocked<OrdersGateway>;
@@ -16,7 +16,7 @@ export const mockMakeOrdersGateway = (): MockedOrdersGateway => {
     deleteItem: vi.fn(noMockDefined),
   };
 
-  vi.spyOn(makeOrdersGatewayModule, "makeOrdersGateway").mockReturnValue(mock);
+  vi.spyOn(useOrdersGatewayModule, "useOrdersGateway").mockReturnValue(mock);
 
   return mock;
 };

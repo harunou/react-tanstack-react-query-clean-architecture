@@ -1,1 +1,1 @@
-export * from "./RemoteOrdersGateway";
+export { RemoteOrdersGateway } from "./RemoteOrdersGateway";
