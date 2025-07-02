@@ -1,8 +1,7 @@
-import type { OrderEntityId, ItemEntityId } from "../../types";
+import type { OrderEntityId, ItemEntityId, OrdersRepository } from "../../types";
 import { useQuery, useMutation, useQueryClient, useIsMutating } from "@tanstack/react-query";
 import { useGatewayResource, useOrdersGateway } from "./hooks";
 import { ordersRepositoryKeys } from "./ordersRepositoryKeys";
-import type { OrdersRepository } from "../../types";
 
 const useGetOrders: OrdersRepository["useGetOrders"] = (forceResource) => {
   const resource = useGatewayResource(forceResource);
