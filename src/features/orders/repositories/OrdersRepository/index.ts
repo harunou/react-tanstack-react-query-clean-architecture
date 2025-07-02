@@ -1,1 +1,2 @@
-export * from "./hooks";
+export * from "./OrdersRepository";
+export * from "./OrdersRepository.types";

@@ -1,4 +1,4 @@
-import type { OrdersResource } from "../../../types";
+import type { OrdersResource } from "../../types";
 
 const ORDERS_NAMESPACE = ["orders"] as const;
 
