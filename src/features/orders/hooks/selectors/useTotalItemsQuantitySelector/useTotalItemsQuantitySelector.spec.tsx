@@ -1,23 +1,24 @@
-import { describe, it, expect, vi, beforeEach, afterEach, type Mocked } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { useTotalItemsQuantitySelector } from "./useTotalItemsQuantitySelector";
 import { render, renderHook, screen } from "@testing-library/react";
 import { memo, type FC, type PropsWithChildren } from "react";
 import type { UserEvent } from "@testing-library/user-event";
 import { output } from "../../../../../utils/testing";
 import { ordersRepository } from "../../../repositories";
-import type { OrdersGateway, OrderEntity } from "../../../types";
+import type { OrderEntity } from "../../../types";
 import { makeOrderEntityId } from "../../../utils";
 import {
   resetOrderEntitiesFactories,
   stubMakeOrdersService,
   makeOrderEntities,
+  type MockedOrdersService,
 } from "../../../utils/testing";
 import { makeComponentFixture } from "../../../utils/testing/makeComponentFixture";
 
 interface LocalTestContext {
   Fixture: FC<PropsWithChildren<unknown>>;
   user: UserEvent;
-  gateway: Mocked<OrdersGateway>;
+  ordersService: MockedOrdersService;
   orders: OrderEntity[];
 }
 
@@ -37,7 +38,7 @@ describe(`${useTotalItemsQuantitySelector.name}`, () => {
     const { Fixture, user } = makeComponentFixture();
     context.Fixture = Fixture;
     context.user = user;
-    context.gateway = stubMakeOrdersService();
+    context.ordersService = stubMakeOrdersService();
     context.orders = makeOrderEntities();
   });
 
@@ -47,7 +48,7 @@ describe(`${useTotalItemsQuantitySelector.name}`, () => {
   });
 
   it<LocalTestContext>("returns 0 when there are no orders", async (context) => {
-    context.gateway.getOrders.mockResolvedValueOnce([]);
+    context.ordersService.getOrders.mockResolvedValueOnce([]);
 
     const { result } = renderHook(() => useTotalItemsQuantitySelector(), {
       wrapper: context.Fixture,
@@ -59,7 +60,7 @@ describe(`${useTotalItemsQuantitySelector.name}`, () => {
   });
 
   it<LocalTestContext>("returns 0 when the gateway fails to fetch orders", async (context) => {
-    context.gateway.getOrders.mockRejectedValueOnce([]);
+    context.ordersService.getOrders.mockRejectedValueOnce([]);
 
     const { result } = renderHook(() => useTotalItemsQuantitySelector(), {
       wrapper: context.Fixture,
@@ -71,7 +72,7 @@ describe(`${useTotalItemsQuantitySelector.name}`, () => {
   });
 
   it<LocalTestContext>("returns total quantity of items in the order ", async (context) => {
-    context.gateway.getOrders.mockResolvedValueOnce(context.orders);
+    context.ordersService.getOrders.mockResolvedValueOnce(context.orders);
 
     const { result } = renderHook(() => useTotalItemsQuantitySelector(), {
       wrapper: context.Fixture,
@@ -110,8 +111,8 @@ describe(`${useTotalItemsQuantitySelector.name}`, () => {
     const orders0 = context.orders.slice();
     const orders1 = context.orders.slice(0, 2);
 
-    context.gateway.getOrders.mockResolvedValueOnce(orders0).mockResolvedValueOnce(orders1);
-    context.gateway.deleteOrder.mockResolvedValueOnce();
+    context.ordersService.getOrders.mockResolvedValueOnce(orders0).mockResolvedValueOnce(orders1);
+    context.ordersService.deleteOrder.mockResolvedValueOnce();
 
     render(<Sut />);
 

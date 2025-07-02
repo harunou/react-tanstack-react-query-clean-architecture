@@ -1,10 +1,11 @@
-import { describe, it, expect, vi, beforeEach, type Mocked, afterEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { useDeleteOrderUseCase } from "./useDeleteOrderUseCase";
 import type { UserEvent } from "@testing-library/user-event";
 import type { FC, PropsWithChildren } from "react";
-import type { OrderEntity, OrderEntityId, OrdersGateway } from "../../../types";
+import type { OrderEntity, OrderEntityId } from "../../../types";
 import {
   makeOrderEntities,
+  type MockedOrdersService,
   resetOrderEntitiesFactories,
   stubMakeOrdersService,
 } from "../../../utils/testing";
@@ -18,7 +19,7 @@ interface LocalTestContext {
   Fixture: FC<PropsWithChildren<unknown>>;
   Sut: FC;
   user: UserEvent;
-  gateway: Mocked<OrdersGateway>;
+  ordersService: MockedOrdersService;
   orders: OrderEntity[];
 }
 
@@ -65,7 +66,7 @@ describe(`${useDeleteOrderUseCase.name}`, () => {
       );
     };
     context.user = user;
-    context.gateway = stubMakeOrdersService();
+    context.ordersService = stubMakeOrdersService();
     context.orders = makeOrderEntities();
   });
 
@@ -79,8 +80,8 @@ describe(`${useDeleteOrderUseCase.name}`, () => {
     const orders0 = [...context.orders];
     const orders1 = context.orders.filter((order) => order.id !== orderToDelete.id);
 
-    context.gateway.getOrders.mockResolvedValueOnce(orders0).mockResolvedValueOnce(orders1);
-    context.gateway.deleteOrder.mockResolvedValueOnce();
+    context.ordersService.getOrders.mockResolvedValueOnce(orders0).mockResolvedValueOnce(orders1);
+    context.ordersService.deleteOrder.mockResolvedValueOnce();
 
     render(<context.Sut />);
 

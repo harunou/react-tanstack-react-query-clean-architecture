@@ -1,7 +1,8 @@
 import { sleep } from "../../../../../../utils";
-import type { OrdersGateway, OrderEntity, OrderEntityId } from "../../../../types";
+import type { OrderEntity, OrderEntityId } from "../../../../types";
+import type { OrdersService } from "../OrdersService.types";
 
-export class LocalOrdersGateway implements OrdersGateway {
+export class LocalOrdersGateway implements OrdersService {
   static instance: LocalOrdersGateway | null = null;
   static make(orders: OrderEntity[] = []): LocalOrdersGateway {
     if (LocalOrdersGateway.instance === null) {

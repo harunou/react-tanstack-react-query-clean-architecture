@@ -1,2 +1,1 @@
-export * from "./OrdersRepository";
-export * from "./OrdersRepository.types";
+export * from "./ordersRepository";

@@ -1,10 +1,10 @@
 import type { UserEvent } from "@testing-library/user-event";
 import type { FC, PropsWithChildren } from "react";
-import { type Mocked, describe, beforeEach, vi, afterEach, it, expect } from "vitest";
+import { describe, beforeEach, vi, afterEach, it, expect } from "vitest";
 import { makeDeferred, output } from "../../../../../utils/testing";
-import type { OrderEntity, OrdersGateway } from "../../../types";
+import type { OrderEntity } from "../../../types";
 import { makeOrderEntityId, makeItemEntityId } from "../../../utils";
-import { stubMakeOrdersService } from "../../../utils/testing";
+import { type MockedOrdersService, stubMakeOrdersService } from "../../../utils/testing";
 import { makeComponentFixture } from "../../../utils/testing/makeComponentFixture";
 import { useIsOrdersProcessingSelector } from "./useIsOrdersProcessingSelector";
 import { render, screen } from "@testing-library/react";
@@ -14,7 +14,7 @@ interface LocalTestContext {
   Fixture: FC<PropsWithChildren<unknown>>;
   Sut: FC;
   user: UserEvent;
-  gateway: Mocked<OrdersGateway>;
+  ordersService: MockedOrdersService;
 }
 
 type Output = {
@@ -60,7 +60,7 @@ describe(`${useIsOrdersProcessingSelector.name}`, () => {
       );
     };
     context.user = user;
-    context.gateway = stubMakeOrdersService();
+    context.ordersService = stubMakeOrdersService();
   });
 
   afterEach(() => {
@@ -70,7 +70,7 @@ describe(`${useIsOrdersProcessingSelector.name}`, () => {
 
   it<LocalTestContext>("displays isLoading as true when orders are being fetched", async (context) => {
     const { promise } = makeDeferred<OrderEntity[]>();
-    context.gateway.getOrders.mockReturnValue(promise);
+    context.ordersService.getOrders.mockReturnValue(promise);
 
     render(<context.Sut />);
 
@@ -82,7 +82,7 @@ describe(`${useIsOrdersProcessingSelector.name}`, () => {
   });
 
   it<LocalTestContext>("displays isLoading as false when orders are fetched", async (context) => {
-    context.gateway.getOrders.mockResolvedValue([]);
+    context.ordersService.getOrders.mockResolvedValue([]);
 
     render(<context.Sut />);
 
@@ -95,8 +95,8 @@ describe(`${useIsOrdersProcessingSelector.name}`, () => {
 
   it<LocalTestContext>("displays isLoading as true when order item is being deleted", async (context) => {
     const { promise } = makeDeferred<void>();
-    context.gateway.getOrders.mockResolvedValue([]);
-    context.gateway.deleteItem.mockReturnValue(promise);
+    context.ordersService.getOrders.mockResolvedValue([]);
+    context.ordersService.deleteItem.mockReturnValue(promise);
 
     render(<context.Sut />);
 

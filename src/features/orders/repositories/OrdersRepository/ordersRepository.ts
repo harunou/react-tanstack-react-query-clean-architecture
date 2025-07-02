@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient, useIsMutating } from "@tanstack/
 import { useGatewayResource } from "./hooks";
 import { keys } from "./keys";
 import { makeOrdersService } from "./OrdersService";
-import type { OrdersRepository } from "./OrdersRepository.types";
+import type { OrdersRepository } from "../../types";
 
 const useGetOrders: OrdersRepository["useGetOrders"] = (forceResource) => {
   const resource = useGatewayResource(forceResource);
