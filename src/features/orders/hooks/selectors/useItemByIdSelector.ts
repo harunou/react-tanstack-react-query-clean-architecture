@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import type { ItemEntityId, OrderEntity, OrderEntityId } from "../../types";
-import { useGetOrdersOptions } from "../../gateways";
+import { useGetOrdersOptions } from "../../repositories";
 import { useCallback } from "react";
 
 export const useItemByIdSelector = (orderId: OrderEntityId, itemId: ItemEntityId) => {

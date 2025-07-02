@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCallback } from "react";
-import { useGetOrdersOptions } from "../../../../gateways";
+import { useGetOrdersOptions } from "../../../../repositories";
 import type { OrderEntityId, OrderEntity } from "../../../../types";
 import type { ViewModel } from "../DeleteOrder.types";
 import type { UseCaseResult } from "../../../../../../@types";

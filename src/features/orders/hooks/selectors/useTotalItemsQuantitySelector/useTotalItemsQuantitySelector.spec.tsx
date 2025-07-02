@@ -5,7 +5,7 @@ import { memo, type FC, type PropsWithChildren } from "react";
 import { useMutation } from "@tanstack/react-query";
 import type { UserEvent } from "@testing-library/user-event";
 import { output } from "../../../../../utils/testing";
-import { useDeleteOrderOptions } from "../../../gateways";
+import { useDeleteOrderOptions } from "../../../repositories";
 import type { OrdersGateway, OrderEntity } from "../../../types";
 import { makeOrderEntityId } from "../../../utils";
 import {

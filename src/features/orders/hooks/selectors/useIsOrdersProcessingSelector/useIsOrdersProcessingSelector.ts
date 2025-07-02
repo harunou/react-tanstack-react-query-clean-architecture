@@ -3,7 +3,7 @@ import {
   useDeleteOrderItemOptions,
   useDeleteOrderOptions,
   useGetOrdersOptions,
-} from "../../../gateways";
+} from "../../../repositories";
 
 export const useIsOrdersProcessingSelector = (): boolean => {
   const { isLoading: isLoadingWhileGetOrders } = useQuery({

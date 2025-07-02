@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useCallback } from "react";
 import type { UseCase } from "../../../../../@types";
-import { useDeleteOrderOptions } from "../../../gateways";
+import { useDeleteOrderOptions } from "../../../repositories";
 import type { OrderEntityId } from "../../../types";
 
 export const useDeleteOrderUseCase = (): UseCase<{ orderId: OrderEntityId }> => {

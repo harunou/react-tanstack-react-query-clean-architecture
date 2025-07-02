@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { type FC, memo, useCallback, useEffect } from "react";
-import { useGetOrdersOptions } from "../../gateways";
+import { useGetOrdersOptions } from "../../repositories";
 import { useConsoleRenderer } from "../hooks/useConsoleRenderer";
 
 declare global {

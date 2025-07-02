@@ -11,7 +11,7 @@ import { makeComponentFixture } from "../../../../../utils/testing/makeComponent
 import { usePresenter } from "./usePresenter";
 import { makeDeferred } from "../../../../../../../utils/testing";
 import { useMutation } from "@tanstack/react-query";
-import { useDeleteOrderOptions } from "../../../../../gateways/OrdersGateway";
+import { useDeleteOrderOptions } from "../../../../../repositories/OrdersGateway";
 
 interface LocalTestContext {
   Fixture: FC<PropsWithChildren<unknown>>;
