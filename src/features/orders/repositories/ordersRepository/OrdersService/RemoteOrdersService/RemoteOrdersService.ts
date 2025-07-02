@@ -1,4 +1,4 @@
-import { type OrderDto, OrdersApi } from "../../../../api";
+import { OrdersApi, type OrderDto } from "../../../../externalResources";
 import type { ItemEntityId, OrderEntity, OrderEntityId } from "../../../../types";
 import type { OrdersService } from "../OrdersService.types";
 import { toOrderEntity } from "./mappers";

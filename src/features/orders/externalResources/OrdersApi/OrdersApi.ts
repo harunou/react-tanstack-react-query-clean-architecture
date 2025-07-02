@@ -1,4 +1,4 @@
-import type { ApiHttpClient } from "../api.types";
+import type { ApiHttpClient } from "../types";
 import { HttpClient } from "../httpClient";
 import type { OrderDto } from "./OrdersApi.types";
 

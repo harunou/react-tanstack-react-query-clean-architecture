@@ -1,4 +1,4 @@
-import type { ApiHttpClient } from "../api.types";
+import type { ApiHttpClient } from "../types";
 
 export class HttpClient implements ApiHttpClient {
   static make(): ApiHttpClient {
