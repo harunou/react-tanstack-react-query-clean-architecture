@@ -9,7 +9,7 @@ import type { OrderEntity } from "../../types";
 import { makeOrderEntityId } from "../../utils";
 import {
   resetOrderEntitiesFactories,
-  mockMakeOrdersGateway,
+  mockUseOrdersGateway,
   makeOrderEntities,
   type MockedOrdersGateway,
 } from "../../utils/testing";
@@ -38,7 +38,7 @@ describe(`${useTotalItemsQuantitySelector.name}`, () => {
     const { Fixture, user } = makeComponentFixture();
     context.Fixture = Fixture;
     context.user = user;
-    context.ordersGateway = mockMakeOrdersGateway();
+    context.ordersGateway = mockUseOrdersGateway();
     context.orders = makeOrderEntities();
   });
 

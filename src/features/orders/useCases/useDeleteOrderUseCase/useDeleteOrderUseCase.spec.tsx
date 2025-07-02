@@ -7,7 +7,7 @@ import {
   makeOrderEntities,
   type MockedOrdersGateway,
   resetOrderEntitiesFactories,
-  mockMakeOrdersGateway,
+  mockUseOrdersGateway,
 } from "../../utils/testing";
 import { makeComponentFixture } from "../../utils/testing/makeComponentFixture";
 import { useOrderIdsSelector } from "../../selectors";
@@ -66,7 +66,7 @@ describe(`${useDeleteOrderUseCase.name}`, () => {
       );
     };
     context.user = user;
-    context.ordersGateway = mockMakeOrdersGateway();
+    context.ordersGateway = mockUseOrdersGateway();
     context.orders = makeOrderEntities();
   });
 

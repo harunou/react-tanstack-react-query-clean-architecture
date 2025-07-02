@@ -9,7 +9,7 @@ const noMockDefined = (..._args: any[]) => {
   throw new Error("Mock: method has no mock defined");
 };
 
-export const mockMakeOrdersGateway = (): MockedOrdersGateway => {
+export const mockUseOrdersGateway = (): MockedOrdersGateway => {
   const mock: MockedOrdersGateway = {
     getOrders: vi.fn(noMockDefined),
     deleteOrder: vi.fn(noMockDefined),

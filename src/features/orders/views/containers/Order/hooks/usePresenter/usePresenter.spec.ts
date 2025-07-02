@@ -4,7 +4,7 @@ import { describe, beforeEach, vi, afterEach, it, expect } from "vitest";
 import type { OrderEntity } from "../../../../../types";
 import {
   makeOrderEntities,
-  mockMakeOrdersGateway,
+  mockUseOrdersGateway,
   resetOrderEntitiesFactories,
   type MockedOrdersGateway,
 } from "../../../../../utils/testing";
@@ -26,7 +26,7 @@ describe(`${usePresenter.name}`, () => {
 
     const { Fixture } = makeComponentFixture();
     context.Fixture = Fixture;
-    context.ordersGateway = mockMakeOrdersGateway();
+    context.ordersGateway = mockUseOrdersGateway();
     context.orders = makeOrderEntities();
   });
 
