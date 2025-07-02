@@ -2,18 +2,18 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { useDeleteOrderUseCase } from "./useDeleteOrderUseCase";
 import type { UserEvent } from "@testing-library/user-event";
 import type { FC, PropsWithChildren } from "react";
-import type { OrderEntity, OrderEntityId } from "../../../types";
+import type { OrderEntity, OrderEntityId } from "../../types";
 import {
   makeOrderEntities,
   type MockedOrdersService,
   resetOrderEntitiesFactories,
   stubMakeOrdersService,
-} from "../../../utils/testing";
-import { makeComponentFixture } from "../../../utils/testing/makeComponentFixture";
-import { useOrderIdsSelector } from "../../selectors";
-import { output } from "../../../../../utils/testing";
+} from "../../utils/testing";
+import { makeComponentFixture } from "../../utils/testing/makeComponentFixture";
+import { useOrderIdsSelector } from "../../hooks/selectors";
+import { output } from "../../../../utils/testing";
 import { render, screen } from "@testing-library/react";
-import { makeOrderEntityId } from "../../../utils";
+import { makeOrderEntityId } from "../../utils";
 
 interface LocalTestContext {
   Fixture: FC<PropsWithChildren<unknown>>;

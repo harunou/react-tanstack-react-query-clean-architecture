@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import type { UseCase } from "../../../../../@types";
-import type { OrderEntityId } from "../../../types";
-import { ordersRepository } from "../../../repositories";
+import type { UseCase } from "../../../../@types";
+import type { OrderEntityId } from "../../types";
+import { ordersRepository } from "../../repositories";
 
 export const useDeleteOrderUseCase = (): UseCase<{ orderId: OrderEntityId }> => {
   const { mutateAsync: deleteOrder } = ordersRepository.useDeleteOrder();
