@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import type { Controller } from "../../OrderItem.types";
 import type { ItemEntityId, OrderEntityId } from "../../../../../types";
 import { useMutation } from "@tanstack/react-query";
-import { useDeleteOrderItemOptions } from "../../../../../repositories/OrdersGateway";
+import { useDeleteOrderItemOptions } from "../../../../../repositories/OrdersRepository";
 import { useMemoRecord } from "../../../../../../../utils";
 
 export const useController = (params: {

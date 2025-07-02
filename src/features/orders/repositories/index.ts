@@ -1,1 +1,1 @@
-export * from "./OrdersGateway";
+export * from "./OrdersRepository";

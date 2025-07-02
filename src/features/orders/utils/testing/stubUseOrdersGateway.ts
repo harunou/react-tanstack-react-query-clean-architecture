@@ -1,6 +1,6 @@
 import { type Mocked, vi } from "vitest";
 import type { OrdersGateway } from "../../types";
-import * as useOrdersGatewayModule from "../../repositories/OrdersGateway/hooks/useOrdersGateway";
+import * as useOrdersGatewayModule from "../../repositories/OrdersRepository/hooks/useOrdersGateway";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const noMockDefined = (..._args: any[]) => {

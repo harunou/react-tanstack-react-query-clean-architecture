@@ -9,7 +9,7 @@ import { makeComponentFixture } from "../../../utils/testing/makeComponentFixtur
 import { useIsOrdersProcessingSelector } from "./useIsOrdersProcessingSelector";
 import { render, screen } from "@testing-library/react";
 import { useMutation } from "@tanstack/react-query";
-import { useDeleteOrderItemOptions } from "../../../repositories/OrdersGateway";
+import { useDeleteOrderItemOptions } from "../../../repositories/OrdersRepository";
 
 interface LocalTestContext {
   Fixture: FC<PropsWithChildren<unknown>>;
