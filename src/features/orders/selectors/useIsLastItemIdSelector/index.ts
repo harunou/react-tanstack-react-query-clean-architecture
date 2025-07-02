@@ -1,1 +1,1 @@
-export * from "./useIsLastItemIdSelector";
+export { useIsLastItemIdSelector } from "./useIsLastItemIdSelector";

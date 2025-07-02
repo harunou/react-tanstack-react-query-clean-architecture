@@ -1,1 +1,1 @@
-export * from "./useTotalItemsQuantitySelector";
+export { useTotalItemsQuantitySelector } from "./useTotalItemsQuantitySelector";
