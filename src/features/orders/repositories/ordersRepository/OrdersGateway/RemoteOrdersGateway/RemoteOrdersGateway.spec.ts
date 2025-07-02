@@ -1,5 +1,5 @@
 import { describe, it, beforeEach, beforeAll, afterAll, expect, vi } from "vitest";
-import { RemoteOrdersService } from "./RemoteOrdersService";
+import { RemoteOrdersGateway } from "./RemoteOrdersGateway";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 import { makeItemEntityId, makeOrderEntityId } from "../../../../utils";
@@ -9,10 +9,10 @@ import { orderDtoFactory, OrdersApi, ordersApiUrl } from "../../../../externalRe
 const server = setupServer();
 
 interface LocalTestContext {
-  gateway: RemoteOrdersService;
+  gateway: RemoteOrdersGateway;
 }
 
-describe(`${RemoteOrdersService.name}`, () => {
+describe(`${RemoteOrdersGateway.name}`, () => {
   beforeAll(() => {
     server.listen({
       onUnhandledRequest: "error",
@@ -20,7 +20,7 @@ describe(`${RemoteOrdersService.name}`, () => {
   });
   beforeEach<LocalTestContext>((context) => {
     orderDtoFactory.resetCount();
-    context.gateway = RemoteOrdersService.make();
+    context.gateway = RemoteOrdersGateway.make();
   });
   afterAll(() => {
     server.close();
@@ -68,7 +68,7 @@ describe(`${RemoteOrdersService.name}`, () => {
   describe("deleteItem", () => {
     it<LocalTestContext>("deletes item from order", async () => {
       const api = OrdersApi.make();
-      const gateway = new RemoteOrdersService(api);
+      const gateway = new RemoteOrdersGateway(api);
 
       vi.spyOn(api, "updateOrder");
 

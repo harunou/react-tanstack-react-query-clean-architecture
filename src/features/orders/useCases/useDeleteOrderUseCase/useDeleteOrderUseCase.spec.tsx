@@ -5,9 +5,9 @@ import type { FC, PropsWithChildren } from "react";
 import type { OrderEntity, OrderEntityId } from "../../types";
 import {
   makeOrderEntities,
-  type MockedOrdersService,
+  type MockedOrdersGateway,
   resetOrderEntitiesFactories,
-  stubMakeOrdersService,
+  mockMakeOrdersGateway,
 } from "../../utils/testing";
 import { makeComponentFixture } from "../../utils/testing/makeComponentFixture";
 import { useOrderIdsSelector } from "../../selectors";
@@ -19,7 +19,7 @@ interface LocalTestContext {
   Fixture: FC<PropsWithChildren<unknown>>;
   Sut: FC;
   user: UserEvent;
-  ordersService: MockedOrdersService;
+  ordersGateway: MockedOrdersGateway;
   orders: OrderEntity[];
 }
 
@@ -66,7 +66,7 @@ describe(`${useDeleteOrderUseCase.name}`, () => {
       );
     };
     context.user = user;
-    context.ordersService = stubMakeOrdersService();
+    context.ordersGateway = mockMakeOrdersGateway();
     context.orders = makeOrderEntities();
   });
 
@@ -80,8 +80,8 @@ describe(`${useDeleteOrderUseCase.name}`, () => {
     const orders0 = [...context.orders];
     const orders1 = context.orders.filter((order) => order.id !== orderToDelete.id);
 
-    context.ordersService.getOrders.mockResolvedValueOnce(orders0).mockResolvedValueOnce(orders1);
-    context.ordersService.deleteOrder.mockResolvedValueOnce();
+    context.ordersGateway.getOrders.mockResolvedValueOnce(orders0).mockResolvedValueOnce(orders1);
+    context.ordersGateway.deleteOrder.mockResolvedValueOnce();
 
     render(<context.Sut />);
 

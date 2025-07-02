@@ -1,15 +1,15 @@
 import { sleep } from "../../../../../../utils";
 import type { OrderEntity, OrderEntityId } from "../../../../types";
-import type { OrdersService } from "../OrdersService.types";
+import type { OrdersGateway } from "../OrdersGateway.types";
 
-export class InMemoryOrdersService implements OrdersService {
-  static instance: InMemoryOrdersService | null = null;
-  static make(orders: OrderEntity[] = []): InMemoryOrdersService {
-    if (InMemoryOrdersService.instance === null) {
-      InMemoryOrdersService.instance = new InMemoryOrdersService(orders);
+export class InMemoryOrdersGateway implements OrdersGateway {
+  static instance: InMemoryOrdersGateway | null = null;
+  static make(orders: OrderEntity[] = []): InMemoryOrdersGateway {
+    if (InMemoryOrdersGateway.instance === null) {
+      InMemoryOrdersGateway.instance = new InMemoryOrdersGateway(orders);
     }
 
-    return InMemoryOrdersService.instance;
+    return InMemoryOrdersGateway.instance;
   }
 
   private orders = new Map<OrderEntityId, OrderEntity>();

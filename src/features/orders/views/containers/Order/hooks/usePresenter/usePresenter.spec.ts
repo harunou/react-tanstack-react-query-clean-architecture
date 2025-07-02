@@ -4,9 +4,9 @@ import { describe, beforeEach, vi, afterEach, it, expect } from "vitest";
 import type { OrderEntity } from "../../../../../types";
 import {
   makeOrderEntities,
-  stubMakeOrdersService,
+  mockMakeOrdersGateway,
   resetOrderEntitiesFactories,
-  type MockedOrdersService,
+  type MockedOrdersGateway,
 } from "../../../../../utils/testing";
 import { makeComponentFixture } from "../../../../../utils/testing/makeComponentFixture";
 import { usePresenter } from "./usePresenter";
@@ -15,7 +15,7 @@ import { ordersRepository } from "../../../../../repositories";
 
 interface LocalTestContext {
   Fixture: FC<PropsWithChildren<unknown>>;
-  ordersService: MockedOrdersService;
+  ordersGateway: MockedOrdersGateway;
   orders: OrderEntity[];
 }
 
@@ -26,7 +26,7 @@ describe(`${usePresenter.name}`, () => {
 
     const { Fixture } = makeComponentFixture();
     context.Fixture = Fixture;
-    context.ordersService = stubMakeOrdersService();
+    context.ordersGateway = mockMakeOrdersGateway();
     context.orders = makeOrderEntities();
   });
 
@@ -38,8 +38,8 @@ describe(`${usePresenter.name}`, () => {
   it<LocalTestContext>("disables delete order button once deletion process in progress", async (context) => {
     const order0 = context.orders.at(1)!;
     const { promise } = makeDeferred<void>();
-    context.ordersService.getOrders.mockResolvedValue(context.orders);
-    context.ordersService.deleteOrder.mockReturnValue(promise);
+    context.ordersGateway.getOrders.mockResolvedValue(context.orders);
+    context.ordersGateway.deleteOrder.mockReturnValue(promise);
 
     const { result: resultPresenter } = renderHook(() => usePresenter({ orderId: order0.id }), {
       wrapper: context.Fixture,

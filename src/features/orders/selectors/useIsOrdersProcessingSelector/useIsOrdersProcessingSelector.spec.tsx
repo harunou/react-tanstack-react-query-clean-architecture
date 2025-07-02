@@ -4,7 +4,7 @@ import { describe, beforeEach, vi, afterEach, it, expect } from "vitest";
 import { makeDeferred, output } from "../../../../utils/testing";
 import type { OrderEntity } from "../../types";
 import { makeOrderEntityId, makeItemEntityId } from "../../utils";
-import { type MockedOrdersService, stubMakeOrdersService } from "../../utils/testing";
+import { type MockedOrdersGateway, mockMakeOrdersGateway } from "../../utils/testing";
 import { makeComponentFixture } from "../../utils/testing/makeComponentFixture";
 import { useIsOrdersProcessingSelector } from "./useIsOrdersProcessingSelector";
 import { render, screen } from "@testing-library/react";
@@ -14,7 +14,7 @@ interface LocalTestContext {
   Fixture: FC<PropsWithChildren<unknown>>;
   Sut: FC;
   user: UserEvent;
-  ordersService: MockedOrdersService;
+  ordersGateway: MockedOrdersGateway;
 }
 
 type Output = {
@@ -60,7 +60,7 @@ describe(`${useIsOrdersProcessingSelector.name}`, () => {
       );
     };
     context.user = user;
-    context.ordersService = stubMakeOrdersService();
+    context.ordersGateway = mockMakeOrdersGateway();
   });
 
   afterEach(() => {
@@ -70,7 +70,7 @@ describe(`${useIsOrdersProcessingSelector.name}`, () => {
 
   it<LocalTestContext>("displays isLoading as true when orders are being fetched", async (context) => {
     const { promise } = makeDeferred<OrderEntity[]>();
-    context.ordersService.getOrders.mockReturnValue(promise);
+    context.ordersGateway.getOrders.mockReturnValue(promise);
 
     render(<context.Sut />);
 
@@ -82,7 +82,7 @@ describe(`${useIsOrdersProcessingSelector.name}`, () => {
   });
 
   it<LocalTestContext>("displays isLoading as false when orders are fetched", async (context) => {
-    context.ordersService.getOrders.mockResolvedValue([]);
+    context.ordersGateway.getOrders.mockResolvedValue([]);
 
     render(<context.Sut />);
 
@@ -95,8 +95,8 @@ describe(`${useIsOrdersProcessingSelector.name}`, () => {
 
   it<LocalTestContext>("displays isLoading as true when order item is being deleted", async (context) => {
     const { promise } = makeDeferred<void>();
-    context.ordersService.getOrders.mockResolvedValue([]);
-    context.ordersService.deleteItem.mockReturnValue(promise);
+    context.ordersGateway.getOrders.mockResolvedValue([]);
+    context.ordersGateway.deleteItem.mockReturnValue(promise);
 
     render(<context.Sut />);
 

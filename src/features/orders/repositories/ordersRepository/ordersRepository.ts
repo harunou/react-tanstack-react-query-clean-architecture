@@ -2,13 +2,13 @@ import type { OrderEntityId, ItemEntityId } from "../../types";
 import { useQuery, useMutation, useQueryClient, useIsMutating } from "@tanstack/react-query";
 import { useGatewayResource } from "./hooks";
 import { ordersRepositoryKeys } from "./ordersRepositoryKeys";
-import { makeOrdersService } from "./OrdersService";
+import { makeOrdersGateway } from "./OrdersGateway";
 import type { OrdersRepository } from "../../types";
 
 const useGetOrders: OrdersRepository["useGetOrders"] = (forceResource) => {
   const resource = useGatewayResource(forceResource);
   const getOrdersKey = ordersRepositoryKeys.makeGetOrdersKey(resource);
-  const gateway = makeOrdersService(resource);
+  const gateway = makeOrdersGateway(resource);
 
   return useQuery({
     queryFn: async () => await gateway.getOrders(),
@@ -21,7 +21,7 @@ const useDeleteOrder: OrdersRepository["useDeleteOrder"] = (forceResource) => {
   const resource = useGatewayResource(forceResource);
   const deleteOrderKey = ordersRepositoryKeys.makeDeleteOrderKey(resource);
   const getOrdersKey = ordersRepositoryKeys.makeGetOrdersKey(resource);
-  const gateway = makeOrdersService(resource);
+  const gateway = makeOrdersGateway(resource);
 
   return useMutation({
     mutationKey: deleteOrderKey,
@@ -39,7 +39,7 @@ const useDeleteOrderItem: OrdersRepository["useDeleteOrderItem"] = (forceResourc
   const resource = useGatewayResource(forceResource);
   const deleteOrderItemKey = ordersRepositoryKeys.makeDeleteOrderItemKey(resource);
   const getOrdersKey = ordersRepositoryKeys.makeGetOrdersKey(resource);
-  const gateway = makeOrdersService(resource);
+  const gateway = makeOrdersGateway(resource);
 
   return useMutation({
     mutationKey: deleteOrderItemKey,
