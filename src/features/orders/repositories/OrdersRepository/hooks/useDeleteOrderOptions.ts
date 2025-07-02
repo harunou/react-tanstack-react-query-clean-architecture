@@ -3,7 +3,7 @@ import type { OrderEntityId, OrdersResource } from "../../../types";
 import { useDeleteOrderKey } from "./useDeleteOrderKey";
 import { useGetOrdersKey } from "./useGetOrdersKey";
 import { mutationOptions } from "../../../../../utils";
-import { useOrdersGateway } from "./useOrdersGateway";
+import { makeOrdersService } from "../makeOrdersService";
 import { useGatewayResource } from "./useGatewayResource";
 
 export const useDeleteOrderOptions = (forceResource?: OrdersResource) => {
@@ -11,7 +11,7 @@ export const useDeleteOrderOptions = (forceResource?: OrdersResource) => {
   const resource = useGatewayResource(forceResource);
   const mutationKey = useDeleteOrderKey(resource);
   const getOrdersKey = useGetOrdersKey(resource);
-  const gateway = useOrdersGateway(resource);
+  const gateway = makeOrdersService(resource);
 
   // NOTE(harunou): to make the view updated correctly the mutationFn and
   // onSuccess should be async functions

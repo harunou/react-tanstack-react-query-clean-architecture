@@ -4,7 +4,7 @@ import { type Mocked, describe, beforeEach, vi, afterEach, it, expect } from "vi
 import { makeDeferred, output } from "../../../../../utils/testing";
 import type { OrderEntity, OrdersGateway } from "../../../types";
 import { makeOrderEntityId, makeItemEntityId } from "../../../utils";
-import { stubUseOrdersGateway } from "../../../utils/testing";
+import { stubMakeOrdersService } from "../../../utils/testing";
 import { makeComponentFixture } from "../../../utils/testing/makeComponentFixture";
 import { useIsOrdersProcessingSelector } from "./useIsOrdersProcessingSelector";
 import { render, screen } from "@testing-library/react";
@@ -63,7 +63,7 @@ describe(`${useIsOrdersProcessingSelector.name}`, () => {
       );
     };
     context.user = user;
-    context.gateway = stubUseOrdersGateway();
+    context.gateway = stubMakeOrdersService();
   });
 
   afterEach(() => {

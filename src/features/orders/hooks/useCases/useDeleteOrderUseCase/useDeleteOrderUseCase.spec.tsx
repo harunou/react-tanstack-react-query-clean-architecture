@@ -6,7 +6,7 @@ import type { OrderEntity, OrderEntityId, OrdersGateway } from "../../../types";
 import {
   makeOrderEntities,
   resetOrderEntitiesFactories,
-  stubUseOrdersGateway,
+  stubMakeOrdersService,
 } from "../../../utils/testing";
 import { makeComponentFixture } from "../../../utils/testing/makeComponentFixture";
 import { useOrderIdsSelector } from "../../selectors";
@@ -65,7 +65,7 @@ describe(`${useDeleteOrderUseCase.name}`, () => {
       );
     };
     context.user = user;
-    context.gateway = stubUseOrdersGateway();
+    context.gateway = stubMakeOrdersService();
     context.orders = makeOrderEntities();
   });
 

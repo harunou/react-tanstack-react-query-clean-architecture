@@ -10,7 +10,7 @@ import type { OrdersGateway, OrderEntity } from "../../../types";
 import { makeOrderEntityId } from "../../../utils";
 import {
   resetOrderEntitiesFactories,
-  stubUseOrdersGateway,
+  stubMakeOrdersService,
   makeOrderEntities,
 } from "../../../utils/testing";
 import { makeComponentFixture } from "../../../utils/testing/makeComponentFixture";
@@ -38,7 +38,7 @@ describe(`${useTotalItemsQuantitySelector.name}`, () => {
     const { Fixture, user } = makeComponentFixture();
     context.Fixture = Fixture;
     context.user = user;
-    context.gateway = stubUseOrdersGateway();
+    context.gateway = stubMakeOrdersService();
     context.orders = makeOrderEntities();
   });
 

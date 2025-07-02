@@ -2,7 +2,7 @@ import { useController } from "./useController";
 import { afterEach, beforeEach, describe, expect, it, type Mocked, vi } from "vitest";
 import { renderHook } from "@testing-library/react";
 import type { PropsWithChildren, FC } from "react";
-import { stubUseOrdersGateway } from "../../../../../utils/testing";
+import { stubMakeOrdersService } from "../../../../../utils/testing";
 import { makeComponentFixture } from "../../../../../utils/testing/makeComponentFixture";
 import type { ItemEntityId, OrderEntityId, OrdersGateway } from "../../../../../types";
 
@@ -19,7 +19,7 @@ describe(`${useController.name}`, () => {
 
     const { Fixture } = makeComponentFixture();
     context.Fixture = Fixture;
-    context.gateway = stubUseOrdersGateway();
+    context.gateway = stubMakeOrdersService();
   });
 
   afterEach(() => {

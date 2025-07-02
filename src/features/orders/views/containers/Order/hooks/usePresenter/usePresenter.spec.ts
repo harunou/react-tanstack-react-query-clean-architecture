@@ -4,7 +4,7 @@ import { type Mocked, describe, beforeEach, vi, afterEach, it, expect } from "vi
 import type { OrdersGateway, OrderEntity } from "../../../../../types";
 import {
   makeOrderEntities,
-  stubUseOrdersGateway,
+  stubMakeOrdersService,
   resetOrderEntitiesFactories,
 } from "../../../../../utils/testing";
 import { makeComponentFixture } from "../../../../../utils/testing/makeComponentFixture";
@@ -26,7 +26,7 @@ describe(`${usePresenter.name}`, () => {
 
     const { Fixture } = makeComponentFixture();
     context.Fixture = Fixture;
-    context.gateway = stubUseOrdersGateway();
+    context.gateway = stubMakeOrdersService();
     context.orders = makeOrderEntities();
   });
 
