@@ -97,17 +97,6 @@ Dependency graph of the code units.
 
 ```console
 ./src/features/orders
-├── api
-│   ├── api.types.ts
-│   ├── httpClient
-│   │   ├── httpClient.ts
-│   │   └── index.ts
-│   ├── index.ts
-│   └── OrdersApi
-│       ├── index.ts
-│       ├── OrdersApi.factory.ts
-│       ├── OrdersApi.ts
-│       └── OrdersApi.types.ts
 ├── cli
 │   ├── cli.tsx
 │   ├── commands
@@ -126,57 +115,60 @@ Dependency graph of the code units.
 │   ├── hooks
 │   │   └── useConsoleRenderer.ts
 │   └── index.ts
-├── gateways
+├── externalResources
+│   ├── httpClient
+│   │   ├── httpClient.ts
+│   │   └── index.ts
 │   ├── index.ts
-│   └── OrdersGateway
+│   ├── OrdersApi
+│   │   ├── index.ts
+│   │   ├── OrdersApi.factory.ts
+│   │   ├── OrdersApi.ts
+│   │   └── OrdersApi.types.ts
+│   └── types.ts
+├── index.ts
+├── repositories
+│   ├── index.ts
+│   └── ordersRepository
 │       ├── hooks
 │       │   ├── index.ts
-│       │   ├── useDeleteOrderItemKey.ts
-│       │   ├── useDeleteOrderItemOptions.ts
-│       │   ├── useDeleteOrderKey.ts
-│       │   ├── useDeleteOrderOptions.ts
-│       │   ├── useGetOrdersKey.ts
-│       │   ├── useGetOrdersOptions.ts
+│       │   ├── useGatewayResource.ts
 │       │   └── useOrdersGateway.ts
 │       ├── index.ts
-│       ├── LocalOrdersGateway
+│       ├── OrdersGateway
 │       │   ├── index.ts
-│       │   ├── LocalOrdersGateway.spec.ts
-│       │   └── LocalOrdersGateway.ts
-│       ├── makeOrderEntities.ts
-│       └── RemoteOrdersGateway
-│           ├── index.ts
-│           ├── mappers.ts
-│           ├── RemoteOrdersGateway.spec.ts
-│           └── RemoteOrdersGateway.ts
-├── hooks
-│   ├── selectors
+│       │   ├── InMemoryOrdersGateway
+│       │   │   ├── index.ts
+│       │   │   ├── InMemoryOrdersGateway.spec.ts
+│       │   │   └── InMemoryOrdersGateway.ts
+│       │   ├── makeOrderEntities.ts
+│       │   ├── OrdersGateway.types.ts
+│       │   └── RemoteOrdersGateway
+│       │       ├── index.ts
+│       │       ├── mappers.ts
+│       │       ├── RemoteOrdersGateway.spec.ts
+│       │       └── RemoteOrdersGateway.ts
+│       ├── ordersRepositoryKeys.ts
+│       └── ordersRepository.ts
+├── selectors
+│   ├── index.ts
+│   ├── useIsLastItemIdSelector
 │   │   ├── index.ts
-│   │   ├── useIsLastItemIdSelector
-│   │   │   ├── index.ts
-│   │   │   ├── select.spec.ts
-│   │   │   ├── select.ts
-│   │   │   └── useIsLastItemIdSelector.ts
-│   │   ├── useIsLastOrderIdSelector.ts
-│   │   ├── useIsOrdersProcessingSelector
-│   │   │   ├── index.ts
-│   │   │   ├── useIsOrdersProcessingSelector.spec.tsx
-│   │   │   └── useIsOrdersProcessingSelector.ts
-│   │   ├── useItemByIdSelector.ts
-│   │   ├── useOrderByIdSelector.ts
-│   │   ├── useOrderIdsSelector.ts
-│   │   ├── useOrdersResourceSelector.ts
-│   │   └── useTotalItemsQuantitySelector
-│   │       ├── index.ts
-│   │       ├── useTotalItemsQuantitySelector.spec.tsx
-│   │       └── useTotalItemsQuantitySelector.ts
-│   └── useCases
+│   │   ├── useIsLastItemIdSelector.spec.ts
+│   │   └── useIsLastItemIdSelector.ts
+│   ├── useIsLastOrderIdSelector.ts
+│   ├── useIsOrdersProcessingSelector
+│   │   ├── index.ts
+│   │   ├── useIsOrdersProcessingSelector.spec.tsx
+│   │   └── useIsOrdersProcessingSelector.ts
+│   ├── useItemByIdSelector.ts
+│   ├── useOrderByIdSelector.ts
+│   ├── useOrderIdsSelector.ts
+│   ├── useOrdersResourceSelector.ts
+│   └── useTotalItemsQuantitySelector
 │       ├── index.ts
-│       └── useDeleteOrderUseCase
-│           ├── index.ts
-│           ├── useDeleteOrderUseCase.spec.tsx
-│           └── useDeleteOrderUseCase.ts
-├── index.ts
+│       ├── useTotalItemsQuantitySelector.spec.tsx
+│       └── useTotalItemsQuantitySelector.ts
 ├── stores
 │   ├── hooks
 │   │   ├── index.ts
@@ -193,11 +185,17 @@ Dependency graph of the code units.
 │   │   │   ├── index.ts
 │   │   │   └── OrderEntity.ts
 │   │   └── OrdersPresentationEntity.ts
-│   ├── gateways
-│   │   ├── index.ts
-│   │   └── OrdersGateway.ts
 │   ├── index.ts
-│   └── OrdersResource.ts
+│   ├── OrdersResource.ts
+│   └── repositories
+│       ├── index.ts
+│       └── OrdersRepository.ts
+├── useCases
+│   ├── index.ts
+│   └── useDeleteOrderUseCase
+│       ├── index.ts
+│       ├── useDeleteOrderUseCase.spec.tsx
+│       └── useDeleteOrderUseCase.ts
 ├── utils
 │   ├── index.ts
 │   └── testing
@@ -205,8 +203,8 @@ Dependency graph of the code units.
 │       ├── itemEntityFactory.ts
 │       ├── makeComponentFixture.tsx
 │       ├── makeOrderEntities.ts
-│       ├── orderEntityFactory.ts
-│       └── stubUseOrdersGateway.ts
+│       ├── mockUseOrdersGateway.ts
+│       └── orderEntityFactory.ts
 └── views
     ├── containers
     │   ├── index.ts
@@ -246,4 +244,6 @@ Dependency graph of the code units.
     │       └── OrdersResourcePicker.tsx
     ├── index.ts
     └── testIds.ts
+
+41 directories, 107 files
 ```
