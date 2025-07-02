@@ -2,7 +2,7 @@ import type { ItemEntityId, OrderEntityId, OrdersResource } from "../../../types
 import { useGetOrdersKey } from "./useGetOrdersKey";
 import { useQueryClient } from "@tanstack/react-query";
 import { mutationOptions } from "../../../../../utils";
-import { makeOrdersService } from "../makeOrdersService";
+import { makeOrdersService } from "../OrdersService";
 import { useGatewayResource } from "./useGatewayResource";
 import { useDeleteOrderItemKey } from "./useDeleteOrderItemKey";
 

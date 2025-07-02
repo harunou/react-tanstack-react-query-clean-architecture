@@ -1,5 +1,5 @@
-import { sleep } from "../../../../../utils";
-import type { OrdersGateway, OrderEntity, OrderEntityId } from "../../../types";
+import { sleep } from "../../../../../../utils";
+import type { OrdersGateway, OrderEntity, OrderEntityId } from "../../../../types";
 
 export class LocalOrdersGateway implements OrdersGateway {
   static instance: LocalOrdersGateway | null = null;

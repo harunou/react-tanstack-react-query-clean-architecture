@@ -1,4 +1,4 @@
-import type { OrdersGateway, OrdersResource } from "../../types";
+import type { OrdersGateway, OrdersResource } from "../../../types";
 import { LocalOrdersGateway } from "./InMemoryOrdersService";
 import { makeOrderEntities } from "./makeOrderEntities";
 import { RemoteOrdersGateway } from "./RemoteOrdersService";

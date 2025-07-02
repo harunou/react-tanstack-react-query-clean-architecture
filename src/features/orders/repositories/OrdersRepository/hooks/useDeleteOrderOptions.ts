@@ -3,7 +3,7 @@ import type { OrderEntityId, OrdersResource } from "../../../types";
 import { useDeleteOrderKey } from "./useDeleteOrderKey";
 import { useGetOrdersKey } from "./useGetOrdersKey";
 import { mutationOptions } from "../../../../../utils";
-import { makeOrdersService } from "../makeOrdersService";
+import { makeOrdersService } from "../OrdersService";
 import { useGatewayResource } from "./useGatewayResource";
 
 export const useDeleteOrderOptions = (forceResource?: OrdersResource) => {

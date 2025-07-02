@@ -1,5 +1,5 @@
-import { type OrderDto, OrdersApi } from "../../../api";
-import type { ItemEntityId, OrderEntity, OrderEntityId, OrdersGateway } from "../../../types";
+import { type OrderDto, OrdersApi } from "../../../../api";
+import type { ItemEntityId, OrderEntity, OrderEntityId, OrdersGateway } from "../../../../types";
 import { toOrderEntity } from "./mappers";
 
 export class RemoteOrdersGateway implements OrdersGateway {

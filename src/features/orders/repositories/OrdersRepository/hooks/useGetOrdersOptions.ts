@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
 import { useGetOrdersKey } from "./useGetOrdersKey";
-import { makeOrdersService } from "../makeOrdersService";
+import { makeOrdersService } from "../OrdersService";
 import type { OrdersResource } from "../../../types";
 import { useGatewayResource } from "./useGatewayResource";
 

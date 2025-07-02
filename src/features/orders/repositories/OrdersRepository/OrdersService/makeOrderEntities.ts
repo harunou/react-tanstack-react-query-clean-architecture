@@ -1,6 +1,6 @@
 import { factoryT, fields } from "factory-t";
-import type { OrderEntity, OrderEntityId, ItemEntity, ItemEntityId } from "../../types";
-import { randomFrom1To100 } from "../../../../utils/testing";
+import type { OrderEntity, OrderEntityId, ItemEntity, ItemEntityId } from "../../../types";
+import { randomFrom1To100 } from "../../../../../utils/testing";
 
 export const itemEntityFactory = factoryT<ItemEntity>({
   id: (ctx) => `${ctx.index}` as ItemEntityId,

@@ -1,9 +1,13 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { LocalOrdersGateway } from "./LocalOrdersGateway";
-import type { OrderEntity } from "../../../types";
-import { itemEntityFactory, makeOrderEntities, orderEntityFactory } from "../../../utils/testing";
-import { makeOrderEntityId } from "../../../utils";
-import { mockSleep } from "../../../../../utils/testing/mockSleep";
+import type { OrderEntity } from "../../../../types";
+import {
+  itemEntityFactory,
+  makeOrderEntities,
+  orderEntityFactory,
+} from "../../../../utils/testing";
+import { makeOrderEntityId } from "../../../../utils";
+import { mockSleep } from "../../../../../../utils/testing/mockSleep";
 
 interface LocalTestContext {
   orders: OrderEntity[];

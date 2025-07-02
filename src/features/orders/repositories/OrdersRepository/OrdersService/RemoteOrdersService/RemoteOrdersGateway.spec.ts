@@ -2,9 +2,9 @@ import { describe, it, beforeEach, beforeAll, afterAll, expect, vi } from "vites
 import { RemoteOrdersGateway } from "./RemoteOrdersGateway";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
-import { orderDtoFactory, OrdersApi, ordersApiUrl } from "../../../api/OrdersApi";
-import { makeItemEntityId, makeOrderEntityId } from "../../../utils";
-import type { OrderEntity } from "../../../types";
+import { orderDtoFactory, OrdersApi, ordersApiUrl } from "../../../../api/OrdersApi";
+import { makeItemEntityId, makeOrderEntityId } from "../../../../utils";
+import type { OrderEntity } from "../../../../types";
 
 const server = setupServer();
 
