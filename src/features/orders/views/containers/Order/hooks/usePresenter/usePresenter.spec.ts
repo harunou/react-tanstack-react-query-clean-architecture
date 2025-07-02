@@ -10,8 +10,7 @@ import {
 import { makeComponentFixture } from "../../../../../utils/testing/makeComponentFixture";
 import { usePresenter } from "./usePresenter";
 import { makeDeferred } from "../../../../../../../utils/testing";
-import { useMutation } from "@tanstack/react-query";
-import { useDeleteOrderOptions } from "../../../../../repositories/OrdersRepository";
+import { ordersRepository } from "../../../../../repositories";
 
 interface LocalTestContext {
   Fixture: FC<PropsWithChildren<unknown>>;
@@ -45,7 +44,7 @@ describe(`${usePresenter.name}`, () => {
       wrapper: context.Fixture,
     });
     const { result: resultDeleteOrder } = renderHook(
-      () => useMutation({ ...useDeleteOrderOptions("local") }),
+      () => ordersRepository.useDeleteOrder("local"),
       {
         wrapper: context.Fixture,
       },

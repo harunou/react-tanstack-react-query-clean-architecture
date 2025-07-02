@@ -3,7 +3,7 @@ import type { Controller } from "../Orders.types";
 import { useQueryClient } from "@tanstack/react-query";
 import { useOrdersResourceSelector } from "../../../../hooks/selectors";
 import { useMemoRecord } from "../../../../../../utils";
-import { keys } from "../../../../repositories";
+import { keys } from "../../../../repositories/OrdersRepository/keys";
 
 export const useController = (): Controller => {
   const queryClient = useQueryClient();
