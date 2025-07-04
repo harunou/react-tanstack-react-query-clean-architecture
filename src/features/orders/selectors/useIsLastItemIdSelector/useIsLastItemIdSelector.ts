@@ -1,10 +1,8 @@
 import type { ItemEntityId, OrderEntity, OrderEntityId } from "../../types";
 import { ordersRepository } from "../../repositories";
 
-const DEFAULT_ORDERS: OrderEntity[] = [];
-
 export const useIsLastItemIdSelector = (orderId: OrderEntityId, itemId: ItemEntityId) => {
-  const { data = DEFAULT_ORDERS } = ordersRepository.useGetOrders();
+  const { data } = ordersRepository.useGetOrders();
   return select(data, orderId, itemId);
 };
 

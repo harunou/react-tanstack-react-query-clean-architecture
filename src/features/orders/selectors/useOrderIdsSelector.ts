@@ -1,10 +1,8 @@
-import type { OrderEntity, OrderEntityId } from "../types";
+import type { OrderEntityId } from "../types";
 import { ordersRepository } from "../repositories";
 
-const DEFAULT_ORDERS: OrderEntity[] = [];
-
 export const useOrderIdsSelector = (): OrderEntityId[] => {
-  const { data: orders = DEFAULT_ORDERS } = ordersRepository.useGetOrders();
+  const { data } = ordersRepository.useGetOrders();
 
-  return orders.map((order) => order.id);
+  return data.map((order) => order.id);
 };

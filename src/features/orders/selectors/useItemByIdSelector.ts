@@ -1,13 +1,11 @@
-import type { ItemEntity, ItemEntityId, OrderEntity, OrderEntityId } from "../types";
+import type { ItemEntity, ItemEntityId, OrderEntityId } from "../types";
 import { ordersRepository } from "../repositories";
-
-const DEFAULT_ORDERS: OrderEntity[] = [];
 
 export const useItemByIdSelector = (
   orderId: OrderEntityId,
   itemId: ItemEntityId,
 ): ItemEntity | undefined => {
-  const { data = DEFAULT_ORDERS } = ordersRepository.useGetOrders();
+  const { data } = ordersRepository.useGetOrders();
 
   const order = data.find((orderEntity) => orderEntity.id === orderId);
 

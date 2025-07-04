@@ -11,6 +11,7 @@ const ITEMS_FALLBACK: ItemEntity[] = [];
 
 export const usePresenter = (params: { orderId: OrderEntityId }): Presenter => {
   const order = useOrderByIdSelector(params.orderId);
+  console.log("Order.usePresenter.order", order);
   const isLastOrderId = useIsLastOrderIdSelector(params.orderId);
   const isProcessingOrders = useIsOrdersProcessingSelector();
 

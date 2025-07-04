@@ -22,7 +22,7 @@ export const usePresenter = () => {
 };
 
 const useOrderIdsSelector = () => {
-  const { refetch } = ordersRepository.useGetOrders();
+  const { refetch } = ordersRepository.useGetOrdersQueryState();
   return useCallback(async (): Promise<OrderEntityId[]> => {
     const { data: orders = [] } = await refetch();
     return orders.map((order: OrderEntity) => order.id);

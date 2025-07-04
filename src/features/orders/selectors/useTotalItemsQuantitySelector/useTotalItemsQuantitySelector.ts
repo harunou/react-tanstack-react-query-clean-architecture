@@ -2,10 +2,8 @@ import { useMemo } from "react";
 import { ordersRepository } from "../../repositories";
 import type { OrderEntity } from "../../types";
 
-const DEFAULT_ORDERS: OrderEntity[] = [];
-
 export const useTotalItemsQuantitySelector = (): number => {
-  const { data = DEFAULT_ORDERS } = ordersRepository.useGetOrders();
+  const { data } = ordersRepository.useGetOrders();
   return useMemo(() => select(data), [data]);
 };
 

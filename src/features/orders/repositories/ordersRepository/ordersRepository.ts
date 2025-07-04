@@ -1,4 +1,4 @@
-import type { OrderEntityId, ItemEntityId, OrdersRepository } from "../../types";
+import type { OrderEntityId, ItemEntityId, OrdersRepository, OrderEntity } from "../../types";
 import {
   useQuery,
   useMutation,
@@ -10,13 +10,36 @@ import { useGatewayResource, useOrdersGateway } from "./hooks";
 import { ordersRepositoryKeys } from "./ordersRepositoryKeys";
 import { isOrderItemMutationVariables } from "./ordersRepository.utils";
 
+const DEFAULT_ORDERS: OrderEntity[] = [];
+
 const useGetOrders: OrdersRepository["useGetOrders"] = (forceResource) => {
   const resource = useGatewayResource(forceResource);
   const gateway = useOrdersGateway(resource);
   const getOrdersKey = ordersRepositoryKeys.makeGetOrdersKey(resource);
 
+  const { data } = useQuery({
+    queryFn: async () => {
+      const orders = await gateway.getOrders();
+      console.log("useGetOrders.orders", orders);
+      return orders;
+    },
+    queryKey: getOrdersKey,
+  });
+
+  return { data: data ?? DEFAULT_ORDERS };
+};
+
+const useGetOrdersQueryState: OrdersRepository["useGetOrdersQueryState"] = (forceResource) => {
+  const resource = useGatewayResource(forceResource);
+  const gateway = useOrdersGateway(resource);
+  const getOrdersKey = ordersRepositoryKeys.makeGetOrdersKey(resource);
+
   return useQuery({
-    queryFn: async () => await gateway.getOrders(),
+    queryFn: async () => {
+      const orders = await gateway.getOrders();
+      console.log("useGetOrdersQueryState.orders", orders);
+      return orders;
+    },
     queryKey: getOrdersKey,
   });
 };
@@ -48,8 +71,9 @@ const useDeleteOrderItem: OrdersRepository["useDeleteOrderItem"] = (forceResourc
 
   return useMutation({
     mutationKey: deleteOrderItemKey,
-    mutationFn: (params: { orderId: OrderEntityId; itemId: ItemEntityId }) =>
-      gateway.deleteItem(params.orderId, params.itemId),
+    mutationFn: async (params: { orderId: OrderEntityId; itemId: ItemEntityId }) => {
+      await gateway.deleteItem(params.orderId, params.itemId);
+    },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: getOrdersKey }),
   });
 };
@@ -95,6 +119,7 @@ const useOrderItemMutationState: OrdersRepository["useOrderItemMutationState"] =
 
 export const ordersRepository: OrdersRepository = {
   useGetOrders,
+  useGetOrdersQueryState,
   useDeleteOrder,
   useDeleteOrderItem,
   useIsDeletingOrderMutating,

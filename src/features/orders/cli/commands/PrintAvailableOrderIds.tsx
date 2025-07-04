@@ -11,7 +11,7 @@ declare global {
 export type PrintAvailableOrderIdsController = () => Promise<string | Error>;
 
 const useController = (): PrintAvailableOrderIdsController => {
-  const { refetch } = ordersRepository.useGetOrders();
+  const { refetch } = ordersRepository.useGetOrdersQueryState();
   return useCallback(async () => {
     try {
       const { data: orders = [] } = await refetch();
