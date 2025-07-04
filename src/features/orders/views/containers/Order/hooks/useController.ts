@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import type { Controller } from "../Order.types";
 import type { OrderEntityId } from "../../../../types";
 import { useMemoRecord } from "../../../../../../utils";
-import { useDeleteOrderUseCase } from "../../../../hooks/useCases";
+import { useDeleteOrderUseCase } from "../../../../useCases";
 
 export const useController = (params: { orderId: OrderEntityId }): Controller => {
   const { execute: executeDeleteOrderUseCase } = useDeleteOrderUseCase();

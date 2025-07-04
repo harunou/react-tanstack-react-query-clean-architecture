@@ -3,15 +3,16 @@ import type { Presenter } from "../../Order.types";
 import type { ItemEntity, OrderEntityId } from "../../../../../types";
 import {
   useOrderByIdSelector,
-  useIsLastOrderId,
+  useIsLastOrderIdSelector,
   useIsOrdersProcessingSelector,
-} from "../../../../../hooks/selectors";
+} from "../../../../../selectors";
 
 const ITEMS_FALLBACK: ItemEntity[] = [];
 
 export const usePresenter = (params: { orderId: OrderEntityId }): Presenter => {
   const order = useOrderByIdSelector(params.orderId);
-  const isLastOrder = useIsLastOrderId(params.orderId);
+  console.log("Order.usePresenter.order", order);
+  const isLastOrderId = useIsLastOrderIdSelector(params.orderId);
   const isProcessingOrders = useIsOrdersProcessingSelector();
 
   const items = order?.itemEntities ?? ITEMS_FALLBACK;
@@ -27,8 +28,8 @@ export const usePresenter = (params: { orderId: OrderEntityId }): Presenter => {
       userId: order.userId,
       orderId: order.id,
       itemIds: items.map((itemEntity) => itemEntity.id),
-      isLastOrder,
+      isLastOrder: isLastOrderId,
       isDeleteOrderButtonDisabled: isProcessingOrders,
     };
-  }, [isLastOrder, isProcessingOrders, order, items]);
+  }, [isLastOrderId, isProcessingOrders, order, items]);
 };

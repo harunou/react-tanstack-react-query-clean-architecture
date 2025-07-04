@@ -3,7 +3,7 @@ import {
   useIsOrdersProcessingSelector,
   useOrderIdsSelector,
   useTotalItemsQuantitySelector,
-} from "../../../../hooks/selectors";
+} from "../../../../selectors";
 import { useMemoRecord } from "../../../../../../utils";
 
 export const usePresenter = (): Presenter => {
